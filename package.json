@@ -11,9 +11,12 @@
     "format": "prettier --check ./src"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "firebase": "^8.2.5",
+    "formik": "^2.2.6",
     "react": "16.13.1",
-    "react-native": "0.63.4"
+    "react-native": "0.63.4",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
