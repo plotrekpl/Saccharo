@@ -10,6 +10,7 @@
 
 import React from 'react';
 import {
+  /** @TODO: If you remove components from your code you should also remove not used imports */
   SafeAreaView,
   StyleSheet,
   ScrollView,
@@ -19,6 +20,7 @@ import {
 } from 'react-native';
 
 import {
+  /** @TODO: If you remove components from your code you should also remove not used imports */
   Header,
   LearnMoreLinks,
   Colors,
@@ -26,6 +28,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+/** @TODO: This variable is not used, should be removed */
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
@@ -36,6 +39,7 @@ const App = () => {
   );
 };
 
+/** @TODO: This variable is not used, should be removed */
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
