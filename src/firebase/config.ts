@@ -11,8 +11,9 @@ const firebaseConfig = {
   messagingSenderId: '12345-insert-yourse',
   appId: '789550583288: 1:1234:web:ee873bd1234c0deb7eba61ce',
 };
-
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 if (!firebase.apps.length) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   firebase.initializeApp(firebaseConfig);
 }
 
