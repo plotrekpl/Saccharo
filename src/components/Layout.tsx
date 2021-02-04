@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
+
 import { palette } from 'src/styles/palette';
 
 export const Layout: React.FC = ({ children }) => {
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <View style={styles.logoWrapper}>
         <Text style={styles.logoTitle}>QofSugar</Text>
       </View>
       <View>{children}</View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   logoTitle: {
-    color: palette.blueSaphire,
+    color: palette.blueSapphire,
     fontSize: 44,
     letterSpacing: 2,
   },

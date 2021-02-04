@@ -1,9 +1,21 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
-import { CustomTextInput } from 'src/components';
 import * as Yup from 'yup';
+
+import { CustomTextInput } from 'src/components';
+
 import { CustomButton } from '../CustomButton';
+
+interface initialValues {
+  email: string;
+  password: string;
+}
+
+const initialValues: initialValues = {
+  email: '',
+  password: '',
+};
 
 export const Login: React.FC = () => {
   const validationSchema = () =>
@@ -13,14 +25,6 @@ export const Login: React.FC = () => {
         .min(6, ({ min }) => `Password must be at least ${min} characters`)
         .required('Password is required'),
     });
-
-  /** It is not necessary but just for clearer code and readability initial values and "real" constants should be put over main component code (line 7)
-   * then you should also create appropriate interface and initialize corresponding variable with initial Values
-   * */
-  const initialValues = {
-    email: '',
-    password: '',
-  };
 
   const handleSubmit = () => {
     resetForm({});
