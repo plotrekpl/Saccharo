@@ -12,7 +12,6 @@ export interface UserRegisterRequest {
 
 export interface UserRegisterResponse extends User {
   refreshToken: string;
-  /** Please check spelling: should be : accessToken, this version will cause inappropriate app behaviour*/
-  accesToken: string;
+  accessToken: string;
   expirationTIme: number;
 }

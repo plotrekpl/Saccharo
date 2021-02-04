@@ -24,6 +24,6 @@ function* watchUserRequest() {
   yield takeLatest(userTypes.USER_REGISTER, userRegisterSaga);
 }
 
-const userSaga = [fork(watchUserRequest)];
+const userSaga = watchUserRequest;
 
 export default userSaga;
