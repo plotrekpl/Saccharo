@@ -9,18 +9,11 @@
  */
 
 import React from 'react';
-import {
-  /** @TODO: If you remove components from your code you should also remove not used imports */
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+/** @TODO: If you remove components from your code you should also remove not used imports */
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'react-native';
 
+/** @TODO: If you remove components from your code you should also remove not used imports */
 import {
-  /** @TODO: If you remove components from your code you should also remove not used imports */
   Header,
   LearnMoreLinks,
   Colors,
@@ -29,7 +22,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 /** @TODO: This variable is not used, should be removed */
-declare const global: {HermesInternal: null | {}};
+declare const global: { HermesInternal: null | {} };
 
 const App = () => {
   return (
@@ -61,10 +54,10 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   sectionDescription: {
-    marginTop: 8,
+    color: Colors.dark,
     fontSize: 18,
     fontWeight: '400',
-    color: Colors.dark,
+    marginTop: 8,
   },
   highlight: {
     fontWeight: '700',
