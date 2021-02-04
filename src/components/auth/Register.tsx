@@ -17,7 +17,9 @@ export const Register: React.FC = () => {
         .oneOf([Yup.ref('password')], 'Passwords do not match')
         .required('Confirm password is required'),
     });
-
+  /** It is not necessary but just for clearer code and readability initial values and "real" constants should be put over main component code (line 7)
+   * then you should also create appropriate interface and initialize corresponding variable with initial Values
+   * */
   const initialValues = {
     name: '',
     email: '',
