@@ -12,7 +12,7 @@ const initialState: State = {
   loading: false,
   error: null,
 };
-
+/** state in userReducer also should be Typed, assigning initialState does not assure proper Type */
 export default function userReducer(state = initialState, actions: userTypes.UserActionType) {
   switch (actions.type) {
     case userTypes.USER_REGISTER_PENDING:
