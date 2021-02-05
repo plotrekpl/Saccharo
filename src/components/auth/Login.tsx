@@ -7,6 +7,7 @@ import { CustomTextInput } from 'src/components';
 
 import { CustomButton } from '../CustomButton';
 
+/** It should be rather Login not initialValues as you use this type in form, moreover interfaces we should name with I like: ILoginValues*/
 interface initialValues {
   email: string;
   password: string;
