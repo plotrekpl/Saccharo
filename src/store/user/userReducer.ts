@@ -12,6 +12,7 @@ const initialState: State = {
   loading: false,
   error: null,
 };
+
 export default function userReducer(
   state: State = initialState,
   actions: userTypes.UserActionType,

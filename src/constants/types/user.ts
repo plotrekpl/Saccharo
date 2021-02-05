@@ -1,17 +1,16 @@
+export interface ICredentials {
+  email: string;
+  password: string;
+}
+
 export interface User {
   uid: string;
   email: string;
-  name: string;
-}
-
-export interface UserRegisterRequest {
-  name: string;
-  email: string;
-  password: string;
+  displayName: string;
 }
 
 export interface UserRegisterResponse extends User {
   refreshToken: string;
   accessToken: string;
-  expirationTIme: number;
+  expirationTime: number;
 }

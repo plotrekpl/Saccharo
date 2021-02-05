@@ -5,12 +5,14 @@ import { palette } from 'src/styles/palette';
 
 export const Layout: React.FC = ({ children }) => {
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.logoWrapper}>
-        <Text style={styles.logoTitle}>QofSugar</Text>
-      </View>
-      <View>{children}</View>
-    </SafeAreaView>
+    <View style={styles.wrapper}>
+      <SafeAreaView>
+        <View style={styles.logoWrapper}>
+          <Text style={styles.logoTitle}>QofSugar</Text>
+        </View>
+        <View>{children}</View>
+      </SafeAreaView>
+    </View>
   );
 };
 

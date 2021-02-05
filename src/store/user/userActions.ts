@@ -1,9 +1,12 @@
-import { UserRegisterRequest, UserRegisterResponse } from '../../constants';
+import { ICredentials, UserRegisterResponse } from '../../constants';
 import * as userTypes from './userTypes';
 
-export const userRegister = (user: UserRegisterRequest): userTypes.UserRegister => ({
+export const userRegister = (
+  credentials: ICredentials,
+  isRegister: boolean,
+): userTypes.UserRegister => ({
   type: userTypes.USER_REGISTER,
-  payload: user,
+  payload: { credentials, isRegister },
 });
 export const userRegisterPending = (): userTypes.UserRegisterPending => ({
   type: userTypes.USER_REGISTER_PENDING,

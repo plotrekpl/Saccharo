@@ -5,7 +5,7 @@ import '@firebase/firestore';
 const firebaseConfig = {
   apiKey: 'AIzaSyAiL_q8VP7bAGZm3k7nAW9JkEOoz0ozuhs',
   authDomain: 'reactnativeapp-9e3eb.firebaseapp.com',
-  databaseURL: 'https://reactnativeapp-9e3eb.firebaseio.com',
+  databaseURL: 'https://reactnativeapp-9e3eb-default-rtdb.firebaseio.com',
   projectId: 'reactnativeapp-9e3eb',
   storageBucket: 'reactnativeapp-9e3eb.appspot.com',
   messagingSenderId: '12345-insert-yourse',

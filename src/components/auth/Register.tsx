@@ -1,30 +1,40 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import { CustomTextInput } from 'src/components';
+import { ICredentials } from 'src/constants';
+import { userRegister } from 'src/store/user/userActions';
 
 import { CustomButton } from '../CustomButton';
+import { Layout } from '../Layout';
 
-interface initialValuesRegister {
-  name: string;
+interface IRegisterValues {
+  displayName: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-const initialValues: initialValuesRegister = {
-  name: '',
+const initialValues: IRegisterValues = {
+  displayName: '',
   email: '',
   password: '',
   confirmPassword: '',
 };
 
-export const Register: React.FC = () => {
+interface IProps {
+  isSignUp: boolean;
+}
+
+export const Register: React.FC<IProps> = ({ isSignUp }) => {
+  const dispatch = useDispatch();
+
   const validationSchema = () =>
     Yup.object({
-      name: Yup.string().required('Name is required'),
+      displayName: Yup.string().required('Name is required'),
       email: Yup.string().email('Please enter valid email').required('Email address id required'),
       password: Yup.string()
         .min(6, ({ min }) => `Password must be at least ${min} characters`)
@@ -35,6 +45,7 @@ export const Register: React.FC = () => {
     });
 
   const handleSubmit = () => {
+    dispatch(userRegister(credentials, isSignUp));
     resetForm({});
   };
 
@@ -44,12 +55,17 @@ export const Register: React.FC = () => {
     onSubmit: handleSubmit,
   });
 
+  const credentials: ICredentials = {
+    email: values.email,
+    password: values.password,
+  };
+
   return (
     <View>
       <CustomTextInput
-        error={errors.name}
-        onChangeText={handleChange('name')}
-        value={values.name}
+        error={errors.displayName}
+        onChangeText={handleChange('displayName')}
+        value={values.displayName}
         placeholder="Name"
       />
       <CustomTextInput
