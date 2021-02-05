@@ -1,12 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import RegisterScreen from './src/screens/register/RegisterScreen';
 
 const App = () => {
-  return (
-    <View>
-      <Text>QofSugar</Text>
-    </View>
-  );
+  return <RegisterScreen />;
 };
 
 export default App;
