@@ -1,15 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Provider } from 'react-redux';
-import store from './src/store/store';
+import RegisterScreen from './src/screens/register/RegisterScreen';
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <Text>Hello</Text>
-    </Provider>
-
-  );
+  return <RegisterScreen />;
 };
 
 export default App;
