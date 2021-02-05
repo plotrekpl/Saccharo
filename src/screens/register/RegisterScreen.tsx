@@ -1,5 +1,6 @@
-import { CustomButton, Layout, Login, Register } from 'src/components';
 import React, { useState } from 'react';
+
+import { CustomButton, Layout, Login, Register } from 'src/components';
 
 const RegisterScreen: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
