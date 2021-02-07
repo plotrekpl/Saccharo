@@ -9,28 +9,22 @@ import { ICredentials } from 'src/constants';
 import { userRegister } from 'src/store/user/userActions';
 
 import { CustomButton } from '../CustomButton';
-import { Layout } from '../Layout';
 
-/** Please consider renaming to IRegisterUser or similar and apply to Login*/
-interface IRegisterValues {
+interface IRegisterUser {
   displayName: string;
   email: string;
   password: string;
   confirmPassword: string;
 }
 
-const initialValues: IRegisterValues = {
+const initialValues: IRegisterUser = {
   displayName: '',
   email: '',
   password: '',
   confirmPassword: '',
 };
 
-interface IProps {
-  isSignUp: boolean;
-}
-
-export const Register: React.FC<IProps> = ({ isSignUp }) => {
+export const Register: React.FC = () => {
   const dispatch = useDispatch();
 
   const validationSchema = () =>
@@ -44,12 +38,9 @@ export const Register: React.FC<IProps> = ({ isSignUp }) => {
         .oneOf([Yup.ref('password')], 'Passwords do not match')
         .required('Confirm password is required'),
     });
-  /** I am not quite sure if the resolution with additional register flag makes sense. Using functions should be specific in name and function,
-   * if you register, "register" flag is redundant. In saga make separate generators for login and register or move the line with logic into proper generators
-   * Login and register in fact are different in function. If you need make any logic extensions for only Login you would need to make additional conditional checks which will make code less readable
-   * */
+
   const handleSubmit = () => {
-    dispatch(userRegister(credentials, isSignUp));
+    dispatch(userRegister(credentials));
     resetForm({});
   };
 

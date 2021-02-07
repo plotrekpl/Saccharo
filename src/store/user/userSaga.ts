@@ -1,24 +1,27 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { ICredentials, UserRegisterResponse } from 'src/constants';
+import { UserResponse } from 'src/constants';
 
 import { firebase } from '../../firebase/config';
 import * as userActions from './userActions';
 import * as userTypes from './userTypes';
 
-async function handleAuth(isLogin: boolean, credential: ICredentials) {
+const auth = firebase.default.auth();
+
+let response;
+
+async function handleRegister(email: string, password: string) {
   try {
-    const auth = firebase.default.auth();
-    let response;
-    if (isLogin) {
-      response = await auth.createUserWithEmailAndPassword(credential.email, credential.password);
-    } else {
-      response = await auth.signInWithEmailAndPassword(credential.email, credential.password);
-    }
+    response = await auth.createUserWithEmailAndPassword(email, password);
     return JSON.parse(JSON.stringify(response.user!));
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
+}
+
+async function handleLogin(email: string, password: string) {
+  try {
+    response = await auth.signInWithEmailAndPassword(email, password);
+    return JSON.parse(JSON.stringify(response.user!));
+  } catch (error) {}
 }
 
 function mapResponseToUser(response: any) {
@@ -40,14 +43,12 @@ function writeUserToDatabase(email: string, key: string) {
     });
 }
 
-function* userRegisterSaga(action: userTypes.UserRegister) {
-  const { isRegister, credentials } = action.payload;
+function* userRegisterSaga(action: userTypes.UserRegisterStarted) {
+  const { email, password } = action.payload;
   try {
     yield put(userActions.userRegisterPending());
-    const response = isRegister
-      ? yield handleAuth(isRegister, credentials)
-      : yield handleAuth(isRegister, credentials);
-    const user: UserRegisterResponse = yield call(mapResponseToUser, response);
+    const response = yield handleRegister(email, password);
+    const user: UserResponse = yield call(mapResponseToUser, response);
     yield call(writeUserToDatabase, user.email, user.uid);
     yield put(userActions.userRegisterResolved(user));
   } catch (error) {
@@ -55,8 +56,21 @@ function* userRegisterSaga(action: userTypes.UserRegister) {
   }
 }
 
+function* userLoginSaga(action: userTypes.UserLoginStarted) {
+  const { email, password } = action.payload;
+  try {
+    yield put(userActions.userLoginPending());
+    const response = yield handleLogin(email, password);
+    const user: UserResponse = yield call(mapResponseToUser, response);
+    yield put(userActions.userLoginResolved(user));
+  } catch (error) {
+    yield put(userActions.userLoginRejected(error));
+  }
+}
+
 function* watchUserRequest() {
-  yield takeLatest(userTypes.USER_REGISTER, userRegisterSaga);
+  yield takeLatest(userTypes.USER_REGISTER_STARTED, userRegisterSaga);
+  yield takeLatest(userTypes.USER_LOGIN_STARTED, userLoginSaga);
 }
 
 const userSaga = watchUserRequest;

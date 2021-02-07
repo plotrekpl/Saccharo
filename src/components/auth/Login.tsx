@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { useFormik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
@@ -8,23 +7,19 @@ import * as Yup from 'yup';
 import { CustomTextInput } from 'src/components';
 import { CustomButton } from 'src/components/CustomButton';
 import { ICredentials } from 'src/constants';
-import { userRegister } from 'src/store/user/userActions';
+import { userLoginStarted } from 'src/store/user/userActions';
 
-interface ILoginValues {
+interface ILoginUser {
   email: string;
   password: string;
 }
 
-const initialValues: ILoginValues = {
+const initialValues: ILoginUser = {
   email: '',
   password: '',
 };
 
-interface IProps {
-  isSignUp: boolean;
-}
-
-export const Login: React.FC<IProps> = ({ isSignUp }) => {
+export const Login: React.FC = () => {
   const dispatch = useDispatch();
 
   const validationSchema = () =>
@@ -36,7 +31,7 @@ export const Login: React.FC<IProps> = ({ isSignUp }) => {
     });
 
   const handleSubmit = () => {
-    dispatch(userRegister(credentials, isSignUp));
+    dispatch(userLoginStarted(credentials));
     resetForm({});
   };
 

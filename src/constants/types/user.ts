@@ -9,7 +9,7 @@ export interface User {
   displayName: string;
 }
 
-export interface UserRegisterResponse extends User {
+export interface UserResponse extends User {
   refreshToken: string;
   accessToken: string;
   expirationTime: number;
