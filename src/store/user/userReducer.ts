@@ -1,14 +1,16 @@
-import { UserResponse } from '../../constants';
+import { IUserData, IUserResponse } from '../../constants';
 import * as userTypes from './userTypes';
 
 interface State {
-  user: UserResponse | null;
+  user: IUserResponse | null;
+  userData: IUserData | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: State = {
   user: null,
+  userData: null,
   loading: false,
   error: null,
 };
@@ -51,6 +53,25 @@ export default function userReducer(
         error: null,
       };
     case userTypes.USER_LOGIN_REJECTED:
+      return {
+        ...state,
+        loading: false,
+        error: actions.payload,
+      };
+    case userTypes.GET_USER_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case userTypes.GET_USER_RESOLVED:
+      return {
+        ...state,
+        userData: actions.payload,
+        loading: false,
+        error: false,
+      };
+    case userTypes.GET_USER_REJECTED:
       return {
         ...state,
         loading: false,

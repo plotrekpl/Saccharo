@@ -53,6 +53,7 @@ export const Register: React.FC = () => {
   const credentials: ICredentials = {
     email: values.email,
     password: values.password,
+    userName: values.displayName,
   };
 
   return (
