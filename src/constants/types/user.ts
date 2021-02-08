@@ -3,15 +3,13 @@ export interface ICredentials {
   password: string;
 }
 
-/** use I prefix for all Interfaces if you want to follow convention */
-export interface User {
+export interface IUser {
   uid: string;
   email: string;
   displayName: string;
 }
 
-/** use I prefix for all Interfaces if you want to follow convention */
-export interface UserResponse extends User {
+export interface IUserResponse extends IUser {
   refreshToken: string;
   accessToken: string;
   expirationTime: number;
