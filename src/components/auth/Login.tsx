@@ -1,24 +1,27 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import { CustomTextInput } from 'src/components';
+import { CustomButton } from 'src/components/CustomButton';
+import { ICredentials } from 'src/constants';
+import { userLoginStarted } from 'src/store/user/userActions';
 
-import { CustomButton } from '../CustomButton';
-
-/** It should be rather Login not initialValues as you use this type in form, moreover interfaces we should name with I like: ILoginValues*/
-interface initialValues {
+interface ILoginUser {
   email: string;
   password: string;
 }
 
-const initialValues: initialValues = {
+const initialValues: ILoginUser = {
   email: '',
   password: '',
 };
 
 export const Login: React.FC = () => {
+  const dispatch = useDispatch();
+
   const validationSchema = () =>
     Yup.object({
       email: Yup.string().email('Please enter valid email').required('Email address id required'),
@@ -28,6 +31,7 @@ export const Login: React.FC = () => {
     });
 
   const handleSubmit = () => {
+    dispatch(userLoginStarted(credentials));
     resetForm({});
   };
 
@@ -36,6 +40,11 @@ export const Login: React.FC = () => {
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  const credentials: ICredentials = {
+    email: values.email,
+    password: values.password,
+  };
 
   return (
     <View>
@@ -52,7 +61,7 @@ export const Login: React.FC = () => {
         placeholder="Password"
         securePassword
       />
-      <CustomButton label="Log in" disabled={!isValid || !dirty} />
+      <CustomButton onPress={handleSubmit} label="Log in" disabled={!isValid || !dirty} />
     </View>
   );
 };

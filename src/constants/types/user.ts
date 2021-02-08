@@ -1,17 +1,16 @@
-export interface User {
-  uid: string;
-  email: string;
-  name: string;
-}
-
-export interface UserRegisterRequest {
-  name: string;
+export interface ICredentials {
   email: string;
   password: string;
 }
 
-export interface UserRegisterResponse extends User {
+export interface IUser {
+  uid: string;
+  email: string;
+  displayName: string;
+}
+
+export interface IUserResponse extends IUser {
   refreshToken: string;
   accessToken: string;
-  expirationTIme: number;
+  expirationTime: number;
 }

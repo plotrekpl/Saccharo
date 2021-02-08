@@ -5,16 +5,21 @@ import { palette } from 'src/styles/palette';
 
 export const Layout: React.FC = ({ children }) => {
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.logoWrapper}>
-        <Text style={styles.logoTitle}>QofSugar</Text>
+    <SafeAreaView style={styles.layout}>
+      <View style={styles.wrapper}>
+        <View style={styles.logoWrapper}>
+          <Text style={styles.logoTitle}>QofSugar</Text>
+        </View>
+        <View>{children}</View>
       </View>
-      <View>{children}</View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  layout: {
+    flex: 1,
+  },
   wrapper: {
     flex: 1,
     paddingHorizontal: 20,
