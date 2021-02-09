@@ -1,20 +1,32 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 
 import 'react-native-gesture-handler';
 import Home from 'src/screens/Home';
+import User from 'src/screens/User';
 import RegisterScreen from 'src/screens/register/RegisterScreen';
 
+import { Routes } from '../constants/enums/routes';
+
 const RootNavigator = () => {
+  const token = true;
+  const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Register">
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
+      {token ? (
+        <Tab.Navigator>
+          <Tab.Screen name={Routes.HomeScreen} component={Home} />
+          <Tab.Screen name={Routes.UserScreen} component={User} />
+        </Tab.Navigator>
+      ) : (
+        <Stack.Navigator>
+          <Stack.Screen name={Routes.RegisterScreen} component={RegisterScreen} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 };

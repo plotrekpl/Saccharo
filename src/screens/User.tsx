@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Home: React.FC = () => {
+const User: React.FC = () => {
   return (
     <View style={styles.headerWrapp}>
-      <Text>Home Screen</Text>
+      <Text>User Screen</Text>
     </View>
   );
 };
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default User;
