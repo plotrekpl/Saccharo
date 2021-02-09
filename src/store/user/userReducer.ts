@@ -77,6 +77,25 @@ export default function userReducer(
         loading: false,
         error: actions.payload,
       };
+    case userTypes.UPDATE_USER_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case userTypes.UPDATE_USER_RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        user: { ...state.user, ...actions.payload },
+      };
+    case userTypes.UPDATE_USER_REJECTED:
+      return {
+        ...state,
+        loading: false,
+        error: actions.payload,
+      };
     default:
       return {
         ...state,

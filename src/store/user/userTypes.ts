@@ -15,7 +15,11 @@ export const GET_USER_STARTED = 'GET_USER_STARTED';
 export const GET_USER_PENDING = 'GET_USER_PENDING';
 export const GET_USER_RESOLVED = 'GET_USER_RESOLVED';
 export const GET_USER_REJECTED = 'GET_USER_REJECTED';
-
+// ---------------- GET USER DATA -----------------
+export const UPDATE_USER_STARTED = 'UPDATE_USER_STARTED';
+export const UPDATE_USER_PENDING = 'UPDATE_USER_PENDING';
+export const UPDATE_USER_RESOLVED = 'UPDATE_USER_RESOLVED';
+export const UPDATE_USER_REJECTED = 'UPDATE_USER_REJECTED';
 // -------------- USER REGISTER ----------------
 export interface UserRegisterStarted {
   type: typeof USER_REGISTER_STARTED;
@@ -64,6 +68,22 @@ export interface GetUserRejected {
   type: typeof GET_USER_REJECTED;
   payload: string;
 }
+// ---------------- GET USER DATA -----------------
+export interface UpdateUserStarted {
+  type: typeof UPDATE_USER_STARTED;
+  payload: IUser;
+}
+export interface UpdateUserPending {
+  type: typeof UPDATE_USER_PENDING;
+}
+export interface UpdateUserResolved {
+  type: typeof UPDATE_USER_RESOLVED;
+  payload: IUser;
+}
+export interface UpdateUserRejected {
+  type: typeof UPDATE_USER_REJECTED;
+  payload: string;
+}
 
 export type UserActionType =
   | UserRegisterStarted
@@ -77,4 +97,8 @@ export type UserActionType =
   | GetUserStarted
   | GetUserPending
   | GetUserResolved
-  | GetUserRejected;
+  | GetUserRejected
+  | UpdateUserStarted
+  | UpdateUserPending
+  | UpdateUserResolved
+  | UpdateUserRejected;

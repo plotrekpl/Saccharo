@@ -51,3 +51,19 @@ export const getUserRejected = (errorMessage: string): userTypes.GetUserRejected
   type: userTypes.GET_USER_REJECTED,
   payload: errorMessage,
 });
+
+export const updateUserStarted = (user: IUser): userTypes.UpdateUserStarted => ({
+  type: userTypes.UPDATE_USER_STARTED,
+  payload: user,
+});
+export const updateUserPending = (): userTypes.UpdateUserPending => ({
+  type: userTypes.UPDATE_USER_PENDING,
+});
+export const updateUserResolved = (user: IUser): userTypes.UpdateUserResolved => ({
+  type: userTypes.UPDATE_USER_RESOLVED,
+  payload: user,
+});
+export const updateUserRejected = (errorMessage: string): userTypes.UpdateUserRejected => ({
+  type: userTypes.UPDATE_USER_REJECTED,
+  payload: errorMessage,
+});

@@ -59,6 +59,11 @@ function fetchUserData(uid: string) {
   return user;
 }
 
+function updateUserInDatabase(user: IUser) {
+  const userDb = firebase.default.auth().currentUser;
+  return firebase.default.database().ref(`users/${userDb?.uid}`).update(user);
+}
+
 function* userRegisterSaga(action: userTypes.UserRegisterStarted) {
   const { email, password, name } = action.payload;
   try {
@@ -97,10 +102,22 @@ function* getUserData(action: userTypes.GetUserStarted) {
   }
 }
 
+function* updateUser(action: userTypes.UpdateUserStarted) {
+  const { payload } = action;
+  try {
+    yield put(userActions.updateUserPending());
+    yield call(updateUserInDatabase, payload);
+    yield put(userActions.updateUserResolved(payload));
+  } catch (error) {
+    yield put(userActions.updateUserRejected(error));
+  }
+}
+
 function* watchUserRequest() {
   yield takeLatest(userTypes.USER_REGISTER_STARTED, userRegisterSaga);
   yield takeLatest(userTypes.USER_LOGIN_STARTED, userLoginSaga);
   yield takeLatest(userTypes.GET_USER_STARTED, getUserData);
+  yield takeLatest(userTypes.UPDATE_USER_STARTED, updateUser);
 }
 
 const userSaga = watchUserRequest;
