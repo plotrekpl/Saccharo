@@ -1,4 +1,4 @@
-import { ICredentials, IUserData, IUserResponse } from '../../constants';
+import { IAuth, IRegisterCredentials, ILoginCredentials, IUser } from '../../constants';
 
 // -------------- USER REGISTER ----------------
 export const USER_REGISTER_STARTED = 'USER_REGISTER_STARTED';
@@ -15,17 +15,18 @@ export const GET_USER_STARTED = 'GET_USER_STARTED';
 export const GET_USER_PENDING = 'GET_USER_PENDING';
 export const GET_USER_RESOLVED = 'GET_USER_RESOLVED';
 export const GET_USER_REJECTED = 'GET_USER_REJECTED';
+
 // -------------- USER REGISTER ----------------
 export interface UserRegisterStarted {
   type: typeof USER_REGISTER_STARTED;
-  payload: ICredentials;
+  payload: IRegisterCredentials;
 }
 export interface UserRegisterPending {
   type: typeof USER_REGISTER_PENDING;
 }
 export interface UserRegisterResolved {
   type: typeof USER_REGISTER_RESOLVED;
-  payload: IUserResponse;
+  payload: IAuth;
 }
 export interface UserRegisterRejected {
   type: typeof USER_REGISTER_REJECTED;
@@ -34,14 +35,14 @@ export interface UserRegisterRejected {
 // ---------------- USER LOGIN -----------------
 export interface UserLoginStarted {
   type: typeof USER_LOGIN_STARTED;
-  payload: ICredentials;
+  payload: ILoginCredentials;
 }
 export interface UserLoginPending {
   type: typeof USER_LOGIN_PENDING;
 }
 export interface UserLoginResolved {
   type: typeof USER_LOGIN_RESOLVED;
-  payload: IUserResponse;
+  payload: IAuth;
 }
 export interface UserLoginRejected {
   type: typeof USER_LOGIN_REJECTED;
@@ -57,7 +58,7 @@ export interface GetUserPending {
 }
 export interface GetUserResolved {
   type: typeof GET_USER_RESOLVED;
-  payload: IUserData;
+  payload: IUser;
 }
 export interface GetUserRejected {
   type: typeof GET_USER_REJECTED;
@@ -73,7 +74,6 @@ export type UserActionType =
   | UserLoginPending
   | UserLoginResolved
   | UserLoginRejected
-  | UserRegisterPending
   | GetUserStarted
   | GetUserPending
   | GetUserResolved
