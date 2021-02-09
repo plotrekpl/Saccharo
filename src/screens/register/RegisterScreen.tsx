@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-native';
 
 import { CustomButton, Layout, Login, Register } from 'src/components';
 
