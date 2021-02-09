@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 import { CustomTextInput } from 'src/components';
-import { ICredentials } from 'src/constants';
+import { IRegisterCredentials } from 'src/constants';
 import { userRegister } from 'src/store/user/userActions';
 
 import { CustomButton } from '../CustomButton';
@@ -50,10 +50,10 @@ export const Register: React.FC = () => {
     onSubmit: handleSubmit,
   });
 
-  const credentials: ICredentials = {
+  const credentials: IRegisterCredentials = {
     email: values.email,
     password: values.password,
-    userName: values.displayName,
+    name: values.displayName,
   };
 
   return (

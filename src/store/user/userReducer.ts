@@ -1,18 +1,18 @@
-import { IUserData, IUserResponse } from '../../constants';
+import { IAuth, IUser } from '../../constants';
 import * as userTypes from './userTypes';
 
 interface State {
-  user: IUserResponse | null;
-  userData: IUserData | null;
+  user: IUser | null;
+  auth: IAuth | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: State = {
   user: null,
-  userData: null,
   loading: false,
   error: null,
+  auth: null,
 };
 
 export default function userReducer(
@@ -29,7 +29,7 @@ export default function userReducer(
     case userTypes.USER_REGISTER_RESOLVED:
       return {
         ...state,
-        user: actions.payload,
+        auth: actions.payload,
         loading: false,
         error: null,
       };
@@ -48,7 +48,7 @@ export default function userReducer(
     case userTypes.USER_LOGIN_RESOLVED:
       return {
         ...state,
-        user: actions.payload,
+        auth: actions.payload,
         loading: false,
         error: null,
       };
@@ -67,7 +67,7 @@ export default function userReducer(
     case userTypes.GET_USER_RESOLVED:
       return {
         ...state,
-        userData: actions.payload,
+        user: actions.payload,
         loading: false,
         error: false,
       };

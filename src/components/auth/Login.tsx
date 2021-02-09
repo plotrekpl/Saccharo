@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 import { CustomTextInput } from 'src/components';
 import { CustomButton } from 'src/components/CustomButton';
-import { ICredentials } from 'src/constants';
+import { ILoginCredentials } from 'src/constants';
 import { userLoginStarted } from 'src/store/user/userActions';
 
 interface ILoginUser {
@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
     onSubmit: handleSubmit,
   });
 
-  const credentials: ICredentials = {
+  const credentials: ILoginCredentials = {
     email: values.email,
     password: values.password,
   };

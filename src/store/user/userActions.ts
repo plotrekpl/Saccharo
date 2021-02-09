@@ -1,14 +1,14 @@
-import { ICredentials, IUserData, IUserResponse } from '../../constants';
+import { ILoginCredentials, IRegisterCredentials, IAuth, IUser } from '../../constants';
 import * as userTypes from './userTypes';
 
-export const userRegister = (credentials: ICredentials): userTypes.UserRegisterStarted => ({
+export const userRegister = (credentials: IRegisterCredentials): userTypes.UserRegisterStarted => ({
   type: userTypes.USER_REGISTER_STARTED,
   payload: credentials,
 });
 export const userRegisterPending = (): userTypes.UserRegisterPending => ({
   type: userTypes.USER_REGISTER_PENDING,
 });
-export const userRegisterResolved = (user: IUserResponse): userTypes.UserRegisterResolved => ({
+export const userRegisterResolved = (user: IAuth): userTypes.UserRegisterResolved => ({
   type: userTypes.USER_REGISTER_RESOLVED,
   payload: user,
 });
@@ -17,14 +17,14 @@ export const userRegisterRejected = (errorMessage: string): userTypes.UserRegist
   payload: errorMessage,
 });
 
-export const userLoginStarted = (credentials: ICredentials): userTypes.UserLoginStarted => ({
+export const userLoginStarted = (credentials: ILoginCredentials): userTypes.UserLoginStarted => ({
   type: userTypes.USER_LOGIN_STARTED,
   payload: credentials,
 });
 export const userLoginPending = (): userTypes.UserLoginPending => ({
   type: userTypes.USER_LOGIN_PENDING,
 });
-export const userLoginResolved = (user: IUserResponse): userTypes.UserLoginResolved => ({
+export const userLoginResolved = (user: IAuth): userTypes.UserLoginResolved => ({
   type: userTypes.USER_LOGIN_RESOLVED,
   payload: user,
 });
@@ -42,7 +42,7 @@ export const getUserPending = (): userTypes.GetUserPending => ({
   type: userTypes.GET_USER_PENDING,
 });
 
-export const getUserResolved = (user: IUserData): userTypes.GetUserResolved => ({
+export const getUserResolved = (user: IUser): userTypes.GetUserResolved => ({
   type: userTypes.GET_USER_RESOLVED,
   payload: user,
 });
