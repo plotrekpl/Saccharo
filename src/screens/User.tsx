@@ -10,6 +10,7 @@ const User: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  /** Please check and consider one of two: headerWrap or HeaderWrapper */
   headerWrapp: {
     flex: 1,
     alignItems: 'center',
