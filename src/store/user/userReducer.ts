@@ -69,7 +69,7 @@ export default function userReducer(
         ...state,
         user: actions.payload,
         loading: false,
-        error: false,
+        error: null,
       };
     case userTypes.GET_USER_REJECTED:
       return {

@@ -1,8 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { IUser, IUserResponse } from 'src/constants';
+import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
 
 import { firebase } from '../../firebase/config';
+import { saveToAsyncStorage } from '../../utils/helpers/asyncStorageHelpers';
 import * as userActions from './userActions';
 import * as userTypes from './userTypes';
 
@@ -46,17 +48,10 @@ function writeUserToDatabase(user: IUser) {
     .set(user);
 }
 
-function fetchUserData(uid: string) {
+async function fetchUserData(uid: string) {
   const users = firebase.default.database().ref(`users/${uid}`);
-  let user;
-  users.on('value', function (snapshot) {
-    user = snapshot.val();
-    return;
-  }),
-    (error: any) => {
-      console.log(error);
-    };
-  return user;
+  const snapshot = await users.once('value');
+  return snapshot.val();
 }
 
 function updateUserInDatabase(user: IUser) {
@@ -73,6 +68,13 @@ function* userRegisterSaga(action: userTypes.UserRegisterStarted) {
     yield call(writeUserToDatabase, data.user);
     yield put({ type: userTypes.GET_USER_STARTED, payload: data.user.uid });
     yield put(userActions.userRegisterResolved(data.auth));
+
+    const dataSaveToAsyncStorage = {
+      uid: data.user.uid,
+      token: data.auth.accessToken,
+      expirationTime: data.auth.expirationTime,
+    };
+    yield call(saveToAsyncStorage, asyncStorageKeys.userData, dataSaveToAsyncStorage);
   } catch (error) {
     yield put(userActions.userRegisterRejected(error));
   }
@@ -94,6 +96,7 @@ function* userLoginSaga(action: userTypes.UserLoginStarted) {
 function* getUserData(action: userTypes.GetUserStarted) {
   const uid = action.payload;
   try {
+    console.log(uid);
     yield put(userActions.getUserPending());
     const user: IUser = yield call(fetchUserData, uid);
     yield put(userActions.getUserResolved(user));
