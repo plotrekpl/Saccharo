@@ -13,6 +13,7 @@ import { AppState } from 'src/store/store';
 import { Routes } from '../constants/enums/routes';
 
 const RootNavigator = () => {
+  /** Nicely done, code saved*/
   const { auth } = useSelector((state: AppState) => state.userReducer);
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();

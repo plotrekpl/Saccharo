@@ -35,7 +35,10 @@ export const Register: React.FC = () => {
         .email(`${t('validation.emailValid')}`)
         .required(`${t('validation.emailRequired')}`),
       password: Yup.string()
-        .min(6, ({ min }) => `${t('validation.passwordMinLength')}${min} characters`)
+        .min(
+          6,
+          ({ min }) => `${t('validation.passwordMinLength')}${min} characters`,
+        ) /** "characters" will not be translated, please check using i18 with parameters that can be injected into text from components */
         .required(`${t('validation.passwordRequired')}`),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref('password')], `${t('validation.confirmPasswordMatch')}`)
