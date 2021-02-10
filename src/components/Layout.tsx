@@ -10,7 +10,7 @@ export const Layout: React.FC = ({ children }) => {
         <View style={styles.logoWrapper}>
           <Text style={styles.logoTitle}>QofSugar</Text>
         </View>
-        <View>{children}</View>
+        <View style={styles.childrenWrapper}>{children}</View>
       </View>
     </SafeAreaView>
   );
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     paddingHorizontal: 20,
-    justifyContent: 'space-around',
     backgroundColor: palette.blue,
   },
   logoWrapper: {
@@ -35,5 +34,8 @@ const styles = StyleSheet.create({
     color: palette.blueSapphire,
     fontSize: 44,
     letterSpacing: 2,
+  },
+  childrenWrapper: {
+    flex: 1,
   },
 });

@@ -1,13 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { UserResponse } from 'src/constants';
+import { IUser, IUserResponse } from 'src/constants';
 
 import { firebase } from '../../firebase/config';
 import * as userActions from './userActions';
 import * as userTypes from './userTypes';
 
 const auth = firebase.default.auth();
-
 let response;
 
 async function handleRegister(email: string, password: string) {
@@ -24,33 +23,56 @@ async function handleLogin(email: string, password: string) {
   } catch (error) {}
 }
 
-function mapResponseToUser(response: any) {
+function mapResponseToUser(response: any, name?: string): IUserResponse {
   return {
-    refreshToken: response.stsTokenManager.refreshToken,
-    accessToken: response.stsTokenManager.accessToken,
-    expirationTime: response.stsTokenManager.expirationTime,
-    uid: response.uid,
-    email: response.email,
+    auth: {
+      refreshToken: response.stsTokenManager.refreshToken,
+      accessToken: response.stsTokenManager.accessToken,
+      expirationTime: response.stsTokenManager.expirationTime,
+    },
+    user: {
+      uid: response.uid,
+      email: response.email,
+      name: name ? name : response.displayName,
+      avatar: response.photoURL,
+    },
   };
 }
 
-function writeUserToDatabase(email: string, key: string) {
+function writeUserToDatabase(user: IUser) {
   firebase.default
     .database()
-    .ref('users/' + key)
-    .set({
-      email,
-    });
+    .ref('users/' + user.uid)
+    .set(user);
+}
+
+function fetchUserData(uid: string) {
+  const users = firebase.default.database().ref(`users/${uid}`);
+  let user;
+  users.on('value', function (snapshot) {
+    user = snapshot.val();
+    return;
+  }),
+    (error: any) => {
+      console.log(error);
+    };
+  return user;
+}
+
+function updateUserInDatabase(user: IUser) {
+  const userDb = firebase.default.auth().currentUser;
+  return firebase.default.database().ref(`users/${userDb?.uid}`).update(user);
 }
 
 function* userRegisterSaga(action: userTypes.UserRegisterStarted) {
-  const { email, password } = action.payload;
+  const { email, password, name } = action.payload;
   try {
     yield put(userActions.userRegisterPending());
     const response = yield handleRegister(email, password);
-    const user: UserResponse = yield call(mapResponseToUser, response);
-    yield call(writeUserToDatabase, user.email, user.uid);
-    yield put(userActions.userRegisterResolved(user));
+    const data = yield call(mapResponseToUser, response, name);
+    yield call(writeUserToDatabase, data.user);
+    yield put({ type: userTypes.GET_USER_STARTED, payload: data.user.uid });
+    yield put(userActions.userRegisterResolved(data.auth));
   } catch (error) {
     yield put(userActions.userRegisterRejected(error));
   }
@@ -61,16 +83,41 @@ function* userLoginSaga(action: userTypes.UserLoginStarted) {
   try {
     yield put(userActions.userLoginPending());
     const response = yield handleLogin(email, password);
-    const user: UserResponse = yield call(mapResponseToUser, response);
-    yield put(userActions.userLoginResolved(user));
+    const data = yield call(mapResponseToUser, response);
+    yield put({ type: userTypes.GET_USER_STARTED, payload: data.user.uid });
+    yield put(userActions.userLoginResolved(data.auth));
   } catch (error) {
     yield put(userActions.userLoginRejected(error));
+  }
+}
+
+function* getUserData(action: userTypes.GetUserStarted) {
+  const uid = action.payload;
+  try {
+    yield put(userActions.getUserPending());
+    const user: IUser = yield call(fetchUserData, uid);
+    yield put(userActions.getUserResolved(user));
+  } catch (error) {
+    yield put(userActions.getUserRejected(error));
+  }
+}
+
+function* updateUser(action: userTypes.UpdateUserStarted) {
+  const { payload } = action;
+  try {
+    yield put(userActions.updateUserPending());
+    yield call(updateUserInDatabase, payload);
+    yield put(userActions.updateUserResolved(payload));
+  } catch (error) {
+    yield put(userActions.updateUserRejected(error));
   }
 }
 
 function* watchUserRequest() {
   yield takeLatest(userTypes.USER_REGISTER_STARTED, userRegisterSaga);
   yield takeLatest(userTypes.USER_LOGIN_STARTED, userLoginSaga);
+  yield takeLatest(userTypes.GET_USER_STARTED, getUserData);
+  yield takeLatest(userTypes.UPDATE_USER_STARTED, updateUser);
 }
 
 const userSaga = watchUserRequest;
