@@ -16,7 +16,6 @@ const RootNavigator = () => {
   const { auth } = useSelector((state: AppState) => state.userReducer);
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
-  console.log(auth);
 
   return (
     <NavigationContainer>

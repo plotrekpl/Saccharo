@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -21,13 +22,15 @@ const initialValues: ILoginUser = {
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const validationSchema = () =>
     Yup.object({
-      email: Yup.string().email('Please enter valid email').required('Email address id required'),
+      email: Yup.string()
+        .email(`${t('validation.emailValid')}`)
+        .required(`${t('validation.emailRequired')}`),
       password: Yup.string()
-        .min(6, ({ min }) => `Password must be at least ${min} characters`)
-        .required('Password is required'),
+        .min(6, ({ min }) => `${t('validation.passwordMinLength')}${min} characters`)
+        .required(`${t('validation.passwordRequired')}`),
     });
 
   const handleSubmit = () => {
@@ -52,16 +55,20 @@ export const Login: React.FC = () => {
         error={errors.email}
         onChangeText={handleChange('email')}
         value={values.email}
-        placeholder="E-mail"
+        placeholder={t('form.email')}
       />
       <CustomTextInput
         error={errors.password}
         onChangeText={handleChange('password')}
         value={values.password}
-        placeholder="Password"
+        placeholder={t('form.password')}
         securePassword
       />
-      <CustomButton onPress={handleSubmit} label="Log in" disabled={!isValid || !dirty} />
+      <CustomButton
+        onPress={handleSubmit}
+        label={t('authorization.logIn')}
+        disabled={!isValid || !dirty}
+      />
     </View>
   );
 };

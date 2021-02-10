@@ -4,10 +4,6 @@ import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
 
 import { palette } from 'src/styles/palette';
 
-import i18n from '../locales/i18n';
-
-const initI18n = i18n;
-
 export const Layout: React.FC = ({ children }) => {
   const { t } = useTranslation();
   return (
