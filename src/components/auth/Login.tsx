@@ -29,10 +29,7 @@ export const Login: React.FC = () => {
         .email(`${t('validation.emailValid')}`)
         .required(`${t('validation.emailRequired')}`),
       password: Yup.string()
-        .min(
-          6,
-          ({ min }) => `${t('validation.passwordMinLength')}${min} characters`,
-        ) /** "characters" will not be translated, please check using i18 with parameters that can be injected into text from components */
+        .min(6, ({ min }) => `${t('validation.passwordMinLength', { min })}`)
         .required(`${t('validation.passwordRequired')}`),
     });
 
