@@ -1,5 +1,5 @@
 export interface IDrink {
-  /** I think that you should also as "id" for future update, you can also create different types for new drink and fetched drink*/
+  id: string;
   barCode: string;
   name: string;
   amountOfSugar: number;
