@@ -1,11 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CustomButton, Layout } from 'src/components';
+import { AppState } from 'src/store/store';
+import { userLoginStarted, userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
 const UserScreen: React.FC = () => {
+  const { name } = useSelector((state: AppState) => state.userReducer.user!);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   return (
     <Layout>
@@ -15,11 +20,12 @@ const UserScreen: React.FC = () => {
         <View style={styles.user}>
           <View style={styles.userInfo}>
             <Text style={styles.userElement}>{t('user.name')}:</Text>
-            <Text style={styles.userElement}>Dominik</Text>
+            <Text style={styles.userElement}>{name}</Text>
           </View>
         </View>
       </View>
       <CustomButton label={t('user.changeName')} />
+      <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
     </Layout>
   );
 };

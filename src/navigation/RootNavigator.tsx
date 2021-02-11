@@ -17,7 +17,7 @@ import { getFromAsyncStorage } from 'src/utils/helpers/asyncStorageHelpers';
 import { Routes } from '../constants/enums/routes';
 
 const RootNavigator = () => {
-  const { user } = useSelector((state: AppState) => state.userReducer);
+  const { uid } = useSelector((state: AppState) => state.userReducer.user!);
   const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -40,7 +40,7 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer>
-      {user ? (
+      {uid ? (
         <Tab.Navigator>
           <Tab.Screen name={Routes.HomeScreen} component={Home} />
           <Tab.Screen name={Routes.UserScreen} component={UserScreen} />
