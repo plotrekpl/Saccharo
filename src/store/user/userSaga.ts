@@ -56,7 +56,7 @@ async function fetchUserData(uid: string) {
   const snapshot = await users.once('value');
   return snapshot.val();
 }
-
+/** Redundant function, consider use auth.singOut() in logoutSaga to save code */
 async function logOutUser() {
   await auth.signOut();
 }
