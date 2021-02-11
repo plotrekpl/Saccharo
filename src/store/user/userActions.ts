@@ -33,6 +33,24 @@ export const userLoginRejected = (errorMessage: string): userTypes.UserLoginReje
   payload: errorMessage,
 });
 
+export const userLogoutStarted = (): userTypes.UserLogoutStarted => ({
+  type: userTypes.USER_LOGOUT_STARTED,
+});
+
+export const userLogoutPending = (): userTypes.UserLogoutPending => ({
+  type: userTypes.USER_LOGOUT_PENDING,
+});
+
+export const userLogoutResolved = (message: string): userTypes.UserLogoutResolved => ({
+  type: userTypes.USER_LOGOUT_RESOLVED,
+  payload: message,
+});
+
+export const userLogoutRejected = (errorMessage: string): userTypes.UserLogoutRejected => ({
+  type: userTypes.USER_LOGOUT_REJECTED,
+  payload: errorMessage,
+});
+
 export const getUserStarted = (uid: string): userTypes.GetUserStarted => ({
   type: userTypes.GET_USER_STARTED,
   payload: uid,
