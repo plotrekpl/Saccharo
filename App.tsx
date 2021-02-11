@@ -7,7 +7,7 @@ import store from './src/store/store';
 const App = () => {
   return (
     <Provider store={store}>
-      <RegisterScreen />
+      <UserScreen />
     </Provider>
   );
 };

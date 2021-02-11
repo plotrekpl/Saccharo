@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { CustomButton, Layout } from 'src/components';
+import UserData from 'src/components/UserData';
+import CustomModal from 'src/components/auth/CustomModal';
 import { palette } from 'src/styles/palette';
 
 const UserScreen: React.FC = () => {
+  const [visible, setVisible] = useState(false);
   return (
     <Layout>
       <View style={styles.wrapper}>
@@ -17,7 +20,10 @@ const UserScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <CustomButton label="Change name" />
+      <CustomButton label="Change name" onPress={() => setVisible(!visible)} />
+      <CustomModal visible={visible} setVisible={setVisible}>
+        <UserData />
+      </CustomModal>
     </Layout>
   );
 };
