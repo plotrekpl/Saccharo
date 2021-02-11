@@ -56,10 +56,6 @@ async function fetchUserData(uid: string) {
   const snapshot = await users.once('value');
   return snapshot.val();
 }
-/** Redundant function, consider use auth.singOut() in logoutSaga to save code */
-async function logOutUser() {
-  await auth.signOut();
-}
 
 function updateUserInDatabase(user: IUser) {
   const userDb = firebase.default.auth().currentUser;
@@ -107,7 +103,7 @@ function* userLoginSaga(action: userTypes.UserLoginStarted) {
 function* logoutUserSaga(action: userTypes.UserLogoutStarted) {
   try {
     yield put(userActions.userLogoutPending());
-    yield call(logOutUser);
+    auth.signOut();
     yield put(userActions.userLogoutResolved('Log out'));
     yield call(removeFromAsyncStorage, asyncStorageKeys.userData);
   } catch (error) {
