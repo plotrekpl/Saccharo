@@ -29,7 +29,7 @@ export const Login: React.FC = () => {
         .email(`${t('validation.emailValid')}`)
         .required(`${t('validation.emailRequired')}`),
       password: Yup.string()
-        .min(6, ({ min }) => `${t('validation.passwordMinLength')}${min} characters`)
+        .min(6, ({ min }) => `${t('validation.passwordMinLength', { min })}`)
         .required(`${t('validation.passwordRequired')}`),
     });
 

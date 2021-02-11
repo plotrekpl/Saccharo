@@ -16,7 +16,7 @@ const translation = {
     nameRequired: 'Name is required',
     emailRequired: 'Email address is required',
     emailValid: 'Please enter valid email',
-    passwordMinLength: 'Password must be at least - ',
+    passwordMinLength: 'Password must be at least {{min}} characters',
     passwordRequired: 'Password is required',
     confirmPasswordMatch: 'Passwords do not match',
     confirmPasswordRequired: 'Confirm password is required',
