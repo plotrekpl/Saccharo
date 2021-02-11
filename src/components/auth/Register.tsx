@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -26,17 +27,19 @@ const initialValues: IRegisterUser = {
 
 export const Register: React.FC = () => {
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   const validationSchema = () =>
     Yup.object({
-      displayName: Yup.string().required('Name is required'),
-      email: Yup.string().email('Please enter valid email').required('Email address id required'),
+      displayName: Yup.string().required(`${t('validation.nameRequired')}`),
+      email: Yup.string()
+        .email(`${t('validation.emailValid')}`)
+        .required(`${t('validation.emailRequired')}`),
       password: Yup.string()
-        .min(6, ({ min }) => `Password must be at least ${min} characters`)
-        .required('Password is required'),
+        .min(6, ({ min }) => `${t('validation.passwordMinLength', { min })}`)
+        .required(`${t('validation.passwordRequired')}`),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Passwords do not match')
-        .required('Confirm password is required'),
+        .oneOf([Yup.ref('password')], `${t('validation.confirmPasswordMatch')}`)
+        .required(`${t('validation.confirmPasswordRequired')}`),
     });
 
   const handleSubmit = () => {
@@ -62,29 +65,33 @@ export const Register: React.FC = () => {
         error={errors.displayName}
         onChangeText={handleChange('displayName')}
         value={values.displayName}
-        placeholder="Name"
+        placeholder={t('form.name')}
       />
       <CustomTextInput
         error={errors.email}
         onChangeText={handleChange('email')}
         value={values.email}
-        placeholder="E-mail"
+        placeholder={t('form.email')}
       />
       <CustomTextInput
         error={errors.password}
         onChangeText={handleChange('password')}
         value={values.password}
-        placeholder="Password"
+        placeholder={t('form.password')}
         securePassword
       />
       <CustomTextInput
         error={errors.confirmPassword}
         onChangeText={handleChange('confirmPassword')}
         value={values.confirmPassword}
-        placeholder="Confirm Password"
+        placeholder={t('form.confirmPassword')}
         securePassword
       />
-      <CustomButton label="Sign up" onPress={handleSubmit} disabled={!isValid || !dirty} />
+      <CustomButton
+        label={t('authorization.signUp')}
+        onPress={handleSubmit}
+        disabled={!isValid || !dirty}
+      />
     </View>
   );
 };
