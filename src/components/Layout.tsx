@@ -1,14 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
 
 import { palette } from 'src/styles/palette';
 
 export const Layout: React.FC = ({ children }) => {
+  const { t } = useTranslation();
   return (
     <SafeAreaView style={styles.layout}>
       <View style={styles.wrapper}>
         <View style={styles.logoWrapper}>
-          <Text style={styles.logoTitle}>QofSugar</Text>
+          <Text style={styles.logoTitle}>{t('common.title')}</Text>
         </View>
         <View style={styles.childrenWrapper}>{children}</View>
       </View>

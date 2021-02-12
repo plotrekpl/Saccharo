@@ -6,6 +6,7 @@ interface State {
   auth: IAuth | null;
   loading: boolean;
   error: string | null;
+  message: string;
 }
 
 const initialState: State = {
@@ -13,6 +14,7 @@ const initialState: State = {
   loading: false,
   error: null,
   auth: null,
+  message: '',
 };
 
 export default function userReducer(
@@ -58,6 +60,27 @@ export default function userReducer(
         loading: false,
         error: actions.payload,
       };
+    case userTypes.USER_LOGOUT_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case userTypes.USER_LOGOUT_RESOLVED:
+      return {
+        ...state,
+        loading: false,
+        message: actions.payload,
+        user: null,
+        auth: null,
+        error: null,
+      };
+    case userTypes.USER_LOGOUT_REJECTED:
+      return {
+        ...state,
+        loading: false,
+        error: actions.payload,
+      };
     case userTypes.GET_USER_PENDING:
       return {
         ...state,
@@ -69,7 +92,7 @@ export default function userReducer(
         ...state,
         user: actions.payload,
         loading: false,
-        error: false,
+        error: null,
       };
     case userTypes.GET_USER_REJECTED:
       return {

@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CustomButton, Layout } from 'src/components';
 import UserData from 'src/components/UserData';
 import CustomModal from 'src/components/auth/CustomModal';
+import { AppState } from 'src/store/store';
+import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
 const UserScreen: React.FC = () => {
   const [visible, setVisible] = useState(false);
+
+  const { name } = useSelector((state: AppState) => state.userReducer.user!);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <View style={styles.wrapper}>
         <View style={styles.avatar}></View>
-        <Text style={styles.title}>User profile</Text>
+        <Text style={styles.title}>{t('user.profile')}</Text>
         <View style={styles.user}>
           <View style={styles.userInfo}>
-            <Text style={styles.userElement}>Name:</Text>
-            <Text style={styles.userElement}>Dominik</Text>
+            <Text style={styles.userElement}>{t('user.name')}:</Text>
+            <Text style={styles.userElement}>{name}</Text>
           </View>
         </View>
       </View>
@@ -24,6 +33,8 @@ const UserScreen: React.FC = () => {
       <CustomModal visible={visible} setVisible={setVisible}>
         <UserData />
       </CustomModal>
+      <CustomButton label={t('user.changeName')} />
+      <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
     </Layout>
   );
 };
