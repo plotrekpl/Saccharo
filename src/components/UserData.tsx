@@ -16,6 +16,7 @@ export const UserData: React.FC = () => {
   const { user } = useSelector((state: AppState) => state.userReducer);
   const dispatch = useDispatch();
 
+  /** Not typed, Interface should be created for future use */
   const initialValues = {
     name: user!.name,
   };
@@ -25,6 +26,7 @@ export const UserData: React.FC = () => {
       name: Yup.string().required(`${t('validation.nameRequired')}`),
     });
 
+  /** Value is not typed */
   const handleSubmit = (value) => {
     const newUser: IUser = {
       ...user!,

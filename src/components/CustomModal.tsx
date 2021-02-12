@@ -7,7 +7,9 @@ import { BaseModal } from './index';
 
 interface IProps {
   visible: boolean;
+  /** Do not use 'any' type, use specified type, the exception of 'any' use should be pointed out in the comment */
   setVisible: any;
+  /** children don not need to and should not be typed in props */
   children: ReactNode;
 }
 
