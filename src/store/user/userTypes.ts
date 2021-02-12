@@ -10,6 +10,11 @@ export const USER_LOGIN_STARTED = 'USER_LOGIN_STARTED';
 export const USER_LOGIN_PENDING = 'USER_LOGIN_PENDING';
 export const USER_LOGIN_RESOLVED = 'USER_LOGIN_RESOLVED';
 export const USER_LOGIN_REJECTED = 'USER_LOGIN_REJECTED';
+// ---------------- USER LOG OUT -----------------
+export const USER_LOGOUT_STARTED = 'USER_LOGOUT_STARTED';
+export const USER_LOGOUT_PENDING = 'USER_LOGOUT_PENDING';
+export const USER_LOGOUT_RESOLVED = 'USER_LOGOUT_RESOLVED';
+export const USER_LOGOUT_REJECTED = 'USER_LOGOUT_REJECTED';
 // ---------------- GET USER DATA -----------------
 export const GET_USER_STARTED = 'GET_USER_STARTED';
 export const GET_USER_PENDING = 'GET_USER_PENDING';
@@ -20,6 +25,7 @@ export const UPDATE_USER_STARTED = 'UPDATE_USER_STARTED';
 export const UPDATE_USER_PENDING = 'UPDATE_USER_PENDING';
 export const UPDATE_USER_RESOLVED = 'UPDATE_USER_RESOLVED';
 export const UPDATE_USER_REJECTED = 'UPDATE_USER_REJECTED';
+
 // -------------- USER REGISTER ----------------
 export interface UserRegisterStarted {
   type: typeof USER_REGISTER_STARTED;
@@ -36,7 +42,7 @@ export interface UserRegisterRejected {
   type: typeof USER_REGISTER_REJECTED;
   payload: string;
 }
-// ---------------- USER LOGIN -----------------
+// ---------------- USER LOGIN --------------------
 export interface UserLoginStarted {
   type: typeof USER_LOGIN_STARTED;
   payload: ILoginCredentials;
@@ -50,6 +56,21 @@ export interface UserLoginResolved {
 }
 export interface UserLoginRejected {
   type: typeof USER_LOGIN_REJECTED;
+  payload: string;
+}
+// ---------------- USER LOG OUT ------------------
+export interface UserLogoutStarted {
+  type: typeof USER_LOGOUT_STARTED;
+}
+export interface UserLogoutPending {
+  type: typeof USER_LOGOUT_PENDING;
+}
+export interface UserLogoutResolved {
+  type: typeof USER_LOGOUT_RESOLVED;
+  payload: string;
+}
+export interface UserLogoutRejected {
+  type: typeof USER_LOGOUT_REJECTED;
   payload: string;
 }
 // ---------------- GET USER DATA -----------------
@@ -94,6 +115,10 @@ export type UserActionType =
   | UserLoginPending
   | UserLoginResolved
   | UserLoginRejected
+  | UserLogoutStarted
+  | UserLogoutPending
+  | UserLogoutResolved
+  | UserLogoutRejected
   | GetUserStarted
   | GetUserPending
   | GetUserResolved
