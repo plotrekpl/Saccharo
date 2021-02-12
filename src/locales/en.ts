@@ -1,6 +1,7 @@
 const translation = {
   common: {
     title: 'QofSugar',
+    save: 'Save',
   },
   authorization: {
     logIn: 'Log in',
@@ -25,6 +26,9 @@ const translation = {
     profile: 'User profile',
     name: 'Name',
     changeName: 'Change name',
+  },
+  modal: {
+    closeModal: 'Close modal',
   },
 };
 
