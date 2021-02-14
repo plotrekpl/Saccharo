@@ -99,7 +99,7 @@ export interface UpdateUserPending {
 }
 export interface UpdateUserResolved {
   type: typeof UPDATE_USER_RESOLVED;
-  payload: IUser;
+  payload: string;
 }
 export interface UpdateUserRejected {
   type: typeof UPDATE_USER_REJECTED;

@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text } from 'react-native';
@@ -11,32 +11,37 @@ import { updateUserStarted } from 'src/store/user/userActions';
 
 import { CustomButton, CustomTextInput } from './index';
 
+interface IinitialValues {
+  name: string;
+}
+
 export const UserData: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useSelector((state: AppState) => state.userReducer);
   const dispatch = useDispatch();
 
-  /** Not typed, Interface should be created for future use */
-  const initialValues = {
+  const initialValues: IinitialValues = {
     name: user!.name,
   };
+
+  useEffect(() => {
+    setFieldValue('name', user?.name);
+  }, [user]);
 
   const validationSchema = () =>
     Yup.object({
       name: Yup.string().required(`${t('validation.nameRequired')}`),
     });
 
-  /** Value is not typed */
-  const handleSubmit = (value) => {
+  const handleSubmit = (value: IinitialValues) => {
     const newUser: IUser = {
       ...user!,
-      name: value,
+      ...value,
     };
     dispatch(updateUserStarted(newUser));
-    resetForm({});
   };
 
-  const { handleChange, resetForm, values, errors, isValid, dirty } = useFormik({
+  const { setFieldValue, handleChange, values, errors, isValid, dirty } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: handleSubmit,
@@ -53,7 +58,7 @@ export const UserData: React.FC = () => {
       />
       <CustomButton
         label={t('common.save')}
-        onPress={() => handleSubmit(values.name)}
+        onPress={() => handleSubmit(values)}
         disabled={!isValid || !dirty}
       />
     </View>

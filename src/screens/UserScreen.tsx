@@ -9,7 +9,7 @@ import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
 const UserScreen: React.FC = () => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useState(false);
   const { name } = useSelector((state: AppState) => state.userReducer.user!);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -26,8 +26,8 @@ const UserScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <CustomButton label={t('user.changeName')} onPress={() => setVisible(!visible)} />
-      <CustomModal visible={visible} setVisible={setVisible}>
+      <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
+      <CustomModal isVisible={isVisible} setVisible={setVisible}>
         <UserData />
       </CustomModal>
       <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
