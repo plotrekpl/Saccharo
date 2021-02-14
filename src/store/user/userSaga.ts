@@ -114,7 +114,6 @@ function* logoutUserSaga(action: userTypes.UserLogoutStarted) {
 function* getUserData(action: userTypes.GetUserStarted) {
   const uid = action.payload;
   try {
-    console.log(uid);
     yield put(userActions.getUserPending());
     const user: IUser = yield call(fetchUserData, uid);
     yield put(userActions.getUserResolved(user));

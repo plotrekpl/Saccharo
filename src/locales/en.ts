@@ -2,6 +2,9 @@ const translation = {
   common: {
     title: 'QofSugar',
   },
+  drink: {
+    list: 'List of today`s drinks',
+  },
   authorization: {
     logIn: 'Log in',
     signUp: 'Sign up',

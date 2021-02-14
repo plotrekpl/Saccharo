@@ -8,7 +8,7 @@ import { AppState } from 'src/store/store';
 import { userLoginStarted, userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
-const UserScreen: React.FC = () => {
+export const UserScreen: React.FC = () => {
   const { name } = useSelector((state: AppState) => state.userReducer.user!);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -61,5 +61,3 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 });
-
-export default UserScreen;

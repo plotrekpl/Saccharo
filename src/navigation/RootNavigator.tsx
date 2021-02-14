@@ -2,14 +2,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
-import { NativeModules } from 'react-native';
 import 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
-import Home from 'src/screens/Home';
-import RegisterScreen from 'src/screens/RegisterScreen';
-import UserScreen from 'src/screens/UserScreen';
+import { HomeScreen, RegisterScreen, UserScreen } from 'src/screens';
 import { AppState } from 'src/store/store';
 import { getUserStarted } from 'src/store/user/userActions';
 import { getFromAsyncStorage } from 'src/utils/helpers/asyncStorageHelpers';
@@ -42,7 +39,7 @@ const RootNavigator = () => {
     <NavigationContainer>
       {auth ? (
         <Tab.Navigator>
-          <Tab.Screen name={Routes.HomeScreen} component={Home} />
+          <Tab.Screen name={Routes.HomeScreen} component={HomeScreen} />
           <Tab.Screen name={Routes.UserScreen} component={UserScreen} />
         </Tab.Navigator>
       ) : (
