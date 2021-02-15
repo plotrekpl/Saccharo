@@ -7,17 +7,16 @@ import { BaseModal } from './index';
 
 interface IProps {
   isVisible: boolean;
-  /** 'setName' is more convincing in useState as local function name, 'onAction' function name exposed to parent component is more convincing and readable */
-  setVisible: (isVisible: boolean) => void;
+  onClose: (isVisible: boolean) => void;
 }
 
-export const CustomModal: React.FC<IProps> = ({ isVisible, setVisible, children }) => {
+export const CustomModal: React.FC<IProps> = ({ isVisible, onClose, children }) => {
   const { t } = useTranslation();
   return (
     <Modal visible={isVisible} animationType="slide">
       <BaseModal>
         <View>{children}</View>
-        <CustomButton label={t('modal.closeModal')} onPress={() => setVisible(!isVisible)} />
+        <CustomButton label={t('modal.closeModal')} onPress={() => onClose(!isVisible)} />
       </BaseModal>
     </Modal>
   );

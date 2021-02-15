@@ -10,8 +10,8 @@ import { AppState } from 'src/store/store';
 import { updateUserStarted } from 'src/store/user/userActions';
 
 import { CustomButton, CustomTextInput } from './index';
-/** Name should be camelcase */
-interface IinitialValues {
+
+interface IInitialValues {
   name: string;
 }
 
@@ -20,7 +20,7 @@ export const UserData: React.FC = () => {
   const { user } = useSelector((state: AppState) => state.userReducer);
   const dispatch = useDispatch();
 
-  const initialValues: IinitialValues = {
+  const initialValues: IInitialValues = {
     name: user!.name,
   };
 
@@ -33,7 +33,7 @@ export const UserData: React.FC = () => {
       name: Yup.string().required(`${t('validation.nameRequired')}`),
     });
 
-  const handleSubmit = (value: IinitialValues) => {
+  const handleSubmit = (value: IInitialValues) => {
     const newUser: IUser = {
       ...user!,
       ...value,

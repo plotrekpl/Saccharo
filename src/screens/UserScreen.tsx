@@ -27,7 +27,7 @@ const UserScreen: React.FC = () => {
         </View>
       </View>
       <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
-      <CustomModal isVisible={isVisible} setVisible={setVisible}>
+      <CustomModal isVisible={isVisible} onClose={setVisible}>
         <UserData />
       </CustomModal>
       <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
