@@ -5,11 +5,9 @@ import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import { CustomTextInput } from 'src/components';
+import { CustomTextInput, CustomButton } from 'src/components';
 import { IRegisterCredentials } from 'src/constants';
 import { userRegister } from 'src/store/user/userActions';
-
-import { CustomButton } from '../CustomButton';
 
 interface IRegisterUser {
   displayName: string;

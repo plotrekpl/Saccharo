@@ -127,7 +127,8 @@ function* updateUser(action: userTypes.UpdateUserStarted) {
   try {
     yield put(userActions.updateUserPending());
     yield call(updateUserInDatabase, payload);
-    yield put(userActions.updateUserResolved(payload));
+    yield put(userActions.updateUserResolved('Updated'));
+    yield put({ type: userTypes.GET_USER_STARTED, payload: payload.uid });
   } catch (error) {
     yield put(userActions.updateUserRejected(error));
   }

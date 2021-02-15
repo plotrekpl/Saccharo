@@ -1,6 +1,7 @@
 const translation = {
   common: {
     title: 'QofSugar',
+    save: 'Save',
   },
   drink: {
     list: 'List of today`s drinks',
@@ -28,6 +29,9 @@ const translation = {
     profile: 'User profile',
     name: 'Name',
     changeName: 'Change name',
+  },
+  modal: {
+    closeModal: 'Close modal',
   },
 };
 
