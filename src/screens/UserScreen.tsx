@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CustomButton, Layout } from 'src/components';
+import { CustomButton, Layout, UserData, CustomModal } from 'src/components';
 import { AppState } from 'src/store/store';
-import { userLoginStarted, userLogoutStarted } from 'src/store/user/userActions';
+import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
 const UserScreen: React.FC = () => {
+  const [isVisible, setVisible] = useState(false);
   const { name } = useSelector((state: AppState) => state.userReducer.user!);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
   return (
     <Layout>
       <View style={styles.wrapper}>
@@ -24,7 +26,10 @@ const UserScreen: React.FC = () => {
           </View>
         </View>
       </View>
-      <CustomButton label={t('user.changeName')} />
+      <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
+      <CustomModal isVisible={isVisible} onClose={setVisible}>
+        <UserData />
+      </CustomModal>
       <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
     </Layout>
   );
