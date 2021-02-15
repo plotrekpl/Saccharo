@@ -7,6 +7,7 @@ import { BaseModal } from './index';
 
 interface IProps {
   isVisible: boolean;
+  /** 'setName' is more convincing in useState as local function name, 'onAction' function name exposed to parent component is more convincing and readable */
   setVisible: (isVisible: boolean) => void;
 }
 

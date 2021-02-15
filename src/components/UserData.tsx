@@ -10,7 +10,7 @@ import { AppState } from 'src/store/store';
 import { updateUserStarted } from 'src/store/user/userActions';
 
 import { CustomButton, CustomTextInput } from './index';
-
+/** Name should be camelcase */
 interface IinitialValues {
   name: string;
 }
