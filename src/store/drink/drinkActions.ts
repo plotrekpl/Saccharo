@@ -20,3 +20,22 @@ export const createDrinkRejected = (errorMessage: string): drinkTypes.CreateDrin
   type: drinkTypes.CREATE_DRINK_REJECTED,
   payload: errorMessage,
 });
+
+export const getDrinkStarted = (barCode: string): drinkTypes.GetDrinkStarted => ({
+  type: drinkTypes.GET_DRINK_STARTED,
+  payload: barCode,
+});
+
+export const getDrinkPending = (): drinkTypes.GetDrinkPending => ({
+  type: drinkTypes.GET_DRINK_PENDING,
+});
+
+export const getDrinkResolved = (drink: IDrink): drinkTypes.GetDrinkResolved => ({
+  type: drinkTypes.GET_DRINK_RESOLVED,
+  payload: drink,
+});
+
+export const getDrinkRejected = (errorMessage: string): drinkTypes.GetDrinkRejected => ({
+  type: drinkTypes.GET_DRINK_REJECTED,
+  payload: errorMessage,
+});

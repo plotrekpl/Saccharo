@@ -6,7 +6,7 @@ import { firebase } from '../../firebase/config';
 import * as drinkActions from './drinkActions';
 import * as drinkTypes from './drinkTypes';
 
-function* createDrink(action: drinkTypes.CreateDrinkStarted) {
+function* createDrinkSaga(action: drinkTypes.CreateDrinkStarted) {
   const { payload } = action;
   try {
     yield put(drinkActions.createDrinkPending());
@@ -20,8 +20,22 @@ function* createDrink(action: drinkTypes.CreateDrinkStarted) {
   }
 }
 
+function* getDrinkSaga(action: drinkTypes.GetDrinkStarted) {
+  const { payload } = action;
+  try {
+    yield put(drinkActions.getDrinkPending());
+    const refDrink = firebase.default.database().ref(`drinks/${payload}`);
+    const snapshot = yield refDrink.once('value');
+    const drink: IDrink = snapshot.val();
+    yield put(drinkActions.getDrinkResolved(drink));
+  } catch (error) {
+    yield put(drinkActions.getDrinkRejected(error));
+  }
+}
+
 function* watchDrinkRequest() {
-  yield takeLatest(drinkTypes.CREATE_DRINK_STARTED, createDrink);
+  yield takeLatest(drinkTypes.CREATE_DRINK_STARTED, createDrinkSaga);
+  yield takeLatest(drinkTypes.GET_DRINK_STARTED, getDrinkSaga);
 }
 
 const drinkSaga = watchDrinkRequest;
