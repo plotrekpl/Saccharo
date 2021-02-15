@@ -8,6 +8,8 @@ import { AppState } from 'src/store/store';
 
 export const Scan: React.FC = () => {
   const dispatch = useDispatch();
+  /** You get the variable from the store that is not used in the component.
+   * For future use comment the line and add a comment that a variable is implemented because will be needed in future */
   const { drink } = useSelector((state: AppState) => state.drinkReducer);
   const [isBarcodeRead, setIsBarcodeRead] = useState(false);
   const [barcodeType, setBarcodeType] = useState('');
@@ -29,6 +31,7 @@ export const Scan: React.FC = () => {
     }
   }, [isBarcodeRead, barcodeType, barcodeValue]);
 
+  /** Event not typed */
   const onBarcodeRead = (event) => {
     if (!isBarcodeRead) {
       setIsBarcodeRead(true);
@@ -37,11 +40,15 @@ export const Scan: React.FC = () => {
     }
   };
   return (
+    /** Be aware that permissions to use the camera are not android specific,
+     * iOS will not throw an error but AppStore will not allow you to upload the application without appropriate plist setup.
+     * Please check how to set up permissions for the camera in iOS */
     <RNCamera
       style={styles.preview}
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
       androidCameraPermissionOptions={{
+        /** It is reasonable to use i18 here also if we use it in other places*/
         title: 'Permission to use camera',
         message: 'We need your permission to use your camera',
         buttonPositive: 'Ok',
