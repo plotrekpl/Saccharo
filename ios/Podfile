@@ -4,6 +4,17 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '10.0'
 
 target 'ReactNativeAppTS' do
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge', # Include this for RN >= 0.47
+    'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket', # Needed for debugging
+    'RCTAnimation', # Needed for FlatList and animations running on native UI thread
+    # Add any other subspecs you want to use in your project
+  ]
+
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
@@ -22,6 +33,17 @@ target 'ReactNativeAppTS' do
     flipper_post_install(installer)
   end
 end
+
+pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+pod 'react-native-camera', path: '../node_modules/react-native-camera'
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 
 target 'ReactNativeAppTS-tvOS' do
   # Pods for ReactNativeAppTS-tvOS
