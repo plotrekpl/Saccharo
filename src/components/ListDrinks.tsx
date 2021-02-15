@@ -15,7 +15,7 @@ export const ListDrinks: React.FC = () => {
 
   useEffect(() => {
     dispatch(getDrinksStarted());
-  }, [dispatch]);
+  }, []);
 
   return (
     <ScrollView>
