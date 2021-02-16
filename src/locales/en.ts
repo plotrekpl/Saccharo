@@ -5,6 +5,9 @@ const translation = {
     buttonNegative: 'Cancel',
     save: 'Save',
   },
+  drink: {
+    list: 'List of today`s drinks',
+  },
   authorization: {
     logIn: 'Log in',
     signUp: 'Sign up',

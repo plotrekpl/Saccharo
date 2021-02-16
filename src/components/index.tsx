@@ -1,3 +1,5 @@
+export { Drink } from './Drink';
+export { ListDrinks } from './ListDrinks';
 export { CustomTextInput } from './CustomTextInput';
 export { CustomButton } from './CustomButton';
 export { CustomModal } from './CustomModal';
