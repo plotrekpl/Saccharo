@@ -5,8 +5,7 @@ import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-import { CustomTextInput } from 'src/components';
-import { CustomButton } from 'src/components/CustomButton';
+import { CustomTextInput, CustomButton } from 'src/components';
 import { ILoginCredentials } from 'src/constants';
 import { userLoginStarted } from 'src/store/user/userActions';
 

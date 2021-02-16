@@ -3,6 +3,7 @@ const translation = {
     title: 'QofSugar',
     buttonPositive: 'Ok',
     buttonNegative: 'Cancel',
+    save: 'Save',
   },
   authorization: {
     logIn: 'Log in',
@@ -31,6 +32,9 @@ const translation = {
   camera: {
     title: 'Permission to use camera',
     message: 'We need your permission to use your camera',
+  },
+  modal: {
+    closeModal: 'Close modal',
   },
 };
 

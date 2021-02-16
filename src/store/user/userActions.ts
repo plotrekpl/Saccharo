@@ -77,9 +77,9 @@ export const updateUserStarted = (user: IUser): userTypes.UpdateUserStarted => (
 export const updateUserPending = (): userTypes.UpdateUserPending => ({
   type: userTypes.UPDATE_USER_PENDING,
 });
-export const updateUserResolved = (user: IUser): userTypes.UpdateUserResolved => ({
+export const updateUserResolved = (message: string): userTypes.UpdateUserResolved => ({
   type: userTypes.UPDATE_USER_RESOLVED,
-  payload: user,
+  payload: message,
 });
 export const updateUserRejected = (errorMessage: string): userTypes.UpdateUserRejected => ({
   type: userTypes.UPDATE_USER_REJECTED,

@@ -111,7 +111,7 @@ export default function userReducer(
         ...state,
         loading: false,
         error: null,
-        user: { ...state.user, ...actions.payload },
+        message: actions.payload,
       };
     case userTypes.UPDATE_USER_REJECTED:
       return {
