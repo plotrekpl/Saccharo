@@ -7,6 +7,7 @@ interface State {
   message: string;
   loading: boolean;
   error: string | null;
+  drink: IDrink | null;
 }
 
 const initialState: State = {
@@ -14,6 +15,7 @@ const initialState: State = {
   message: '',
   loading: false,
   error: null,
+  drink: null,
 };
 
 export default function drinkReducer(
@@ -35,6 +37,25 @@ export default function drinkReducer(
         error: null,
       };
     case drinkTypes.CREATE_DRINK_REJECTED:
+      return {
+        ...state,
+        loading: false,
+        error: actions.payload,
+      };
+    case drinkTypes.GET_DRINK_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case drinkTypes.GET_DRINK_RESOLVED:
+      return {
+        ...state,
+        drink: actions.payload,
+        loading: false,
+        error: null,
+      };
+    case drinkTypes.GET_DRINK_REJECTED:
       return {
         ...state,
         loading: false,

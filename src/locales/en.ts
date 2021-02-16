@@ -1,6 +1,8 @@
 const translation = {
   common: {
     title: 'QofSugar',
+    buttonPositive: 'Ok',
+    buttonNegative: 'Cancel',
     save: 'Save',
   },
   drink: {
@@ -29,6 +31,10 @@ const translation = {
     profile: 'User profile',
     name: 'Name',
     changeName: 'Change name',
+  },
+  camera: {
+    title: 'Permission to use camera',
+    message: 'We need your permission to use your camera',
   },
   modal: {
     closeModal: 'Close modal',

@@ -6,7 +6,7 @@ import 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
-import { HomeScreen, RegisterScreen, UserScreen } from 'src/screens';
+import { HomeScreen, RegisterScreen, UserScreen, ScanScreen } from 'src/screens';
 import { AppState } from 'src/store/store';
 import { getUserStarted } from 'src/store/user/userActions';
 import { getFromAsyncStorage } from 'src/utils/helpers/asyncStorageHelpers';
@@ -41,6 +41,7 @@ const RootNavigator = () => {
         <Tab.Navigator>
           <Tab.Screen name={Routes.HomeScreen} component={HomeScreen} />
           <Tab.Screen name={Routes.UserScreen} component={UserScreen} />
+          <Tab.Screen name={Routes.ScanScreen} component={ScanScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

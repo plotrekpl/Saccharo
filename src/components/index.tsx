@@ -8,3 +8,4 @@ export { UserData } from './UserData';
 export { Layout } from './Layout';
 export { Login } from './auth/Login';
 export { Register } from './auth/Register';
+export { Scan } from './Scan';

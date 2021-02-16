@@ -13,7 +13,7 @@ async function fetchDrinks() {
   return Object.values(data);
 }
 
-function* createDrink(action: drinkTypes.CreateDrinkStarted) {
+function* createDrinkSaga(action: drinkTypes.CreateDrinkStarted) {
   const { payload } = action;
   try {
     yield put(drinkActions.createDrinkPending());
@@ -27,7 +27,20 @@ function* createDrink(action: drinkTypes.CreateDrinkStarted) {
   }
 }
 
-function* getDrinks(action: drinkTypes.GetDrinksStarted) {
+function* getDrinkSaga(action: drinkTypes.GetDrinkStarted) {
+  const { payload } = action;
+  try {
+    yield put(drinkActions.getDrinkPending());
+    const refDrink = firebase.default.database().ref(`drinks/${payload}`);
+    const snapshot = yield refDrink.once('value');
+    const drink: IDrink = snapshot.val();
+    yield put(drinkActions.getDrinkResolved(drink));
+  } catch (error) {
+    yield put(drinkActions.getDrinkRejected(error));
+  }
+}
+
+function* getDrinksSaga(action: drinkTypes.GetDrinksStarted) {
   try {
     yield put(drinkActions.getDrinksPending());
     const drinks: IDrink[] = yield call(fetchDrinks);
@@ -38,8 +51,9 @@ function* getDrinks(action: drinkTypes.GetDrinksStarted) {
 }
 
 function* watchDrinkRequest() {
-  yield takeLatest(drinkTypes.CREATE_DRINK_STARTED, createDrink);
-  yield takeLatest(drinkTypes.GET_DRINKS_STARTED, getDrinks);
+  yield takeLatest(drinkTypes.CREATE_DRINK_STARTED, createDrinkSaga);
+  yield takeLatest(drinkTypes.GET_DRINK_STARTED, getDrinkSaga);
+  yield takeLatest(drinkTypes.GET_DRINKS_STARTED, getDrinksSaga);
 }
 
 const drinkSaga = watchDrinkRequest;
