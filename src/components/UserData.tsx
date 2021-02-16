@@ -1,4 +1,4 @@
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text } from 'react-native';

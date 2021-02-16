@@ -4,9 +4,12 @@ const translation = {
     buttonPositive: 'Ok',
     buttonNegative: 'Cancel',
     save: 'Save',
+    add: 'Add',
   },
   drink: {
     list: 'List of today`s drinks',
+    name: 'Name',
+    sugar: 'Sugar',
   },
   authorization: {
     logIn: 'Log in',

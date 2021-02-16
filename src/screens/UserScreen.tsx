@@ -8,7 +8,7 @@ import { AppState } from 'src/store/store';
 import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
-const UserScreen: React.FC = () => {
+export const UserScreen: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
   const { name } = useSelector((state: AppState) => state.userReducer.user!);
   const dispatch = useDispatch();
