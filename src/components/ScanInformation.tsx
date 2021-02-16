@@ -18,9 +18,11 @@ export const ScanInformation: React.FC<IProps> = ({ barCode }) => {
         <CreateDrink barCode={barCode} />
       ) : (
         <>
+          {/** Fragment use is redundant*/}
           <Text>{t('drink.notExists')}</Text>
         </>
       )}
+      {/** less code: ${t(isForm ? 'form.close' : 'common.add')} */}
       <CustomButton
         label={isForm ? `${t('form.close')}` : `${t('common.add')}`}
         onPress={() => setIsForm(!isForm)}
