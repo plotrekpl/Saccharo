@@ -13,7 +13,10 @@ export const AddDrink: React.FC = () => {
   const { drink } = useSelector((state: AppState) => state.drinkReducer);
   const dispatch = useDispatch();
   console.log(drink);
-
+  /** I am not sure what this component does. Do we add drink here or we show drink here?
+   * On one hand we are not sure that drink will be available to display<Text>{drink?.name}</Text>,
+   * on the other we are sure it will be available addDrinkStarted(drink!)
+   * It seems like this code will generate errors when drink is not yest fetched from state or db */
   return (
     <View>
       <View style={styles.describeWrapper}>
