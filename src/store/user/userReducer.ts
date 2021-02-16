@@ -119,6 +119,25 @@ export default function userReducer(
         loading: false,
         error: actions.payload,
       };
+    case userTypes.ADD_DRINK_PENDING:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case userTypes.ADD_DRINK_RESOLVED:
+      return {
+        ...state,
+        message: actions.payload,
+        loading: false,
+        error: null,
+      };
+    case userTypes.ADD_DRINK_REJECTED:
+      return {
+        ...state,
+        loading: false,
+        error: actions.payload,
+      };
     default:
       return {
         ...state,
