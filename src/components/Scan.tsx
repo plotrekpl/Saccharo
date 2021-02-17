@@ -9,9 +9,10 @@ import { getDrinkStarted } from 'src/store/drink/drinkActions';
 interface IProps {
   showModal: (open: boolean) => void;
   isVisible: boolean;
+  setBarCode: (barCode: string) => void;
 }
 
-export const Scan: React.FC<IProps> = ({ showModal, isVisible }) => {
+export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isBarcodeRead, setIsBarcodeRead] = useState(false);
@@ -28,6 +29,7 @@ export const Scan: React.FC<IProps> = ({ showModal, isVisible }) => {
             setBarcodeType('');
             setBarcodeValue('');
             dispatch(getDrinkStarted(barcodeValue));
+            setBarCode(barcodeValue);
             showModal(!isVisible);
           },
         },
