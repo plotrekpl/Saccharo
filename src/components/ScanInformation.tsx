@@ -14,17 +14,9 @@ export const ScanInformation: React.FC<IProps> = ({ barCode }) => {
   const { t } = useTranslation();
   return (
     <View>
-      {isForm ? (
-        <CreateDrink barCode={barCode} />
-      ) : (
-        <>
-          {/** Fragment use is redundant*/}
-          <Text>{t('drink.notExists')}</Text>
-        </>
-      )}
-      {/** less code: ${t(isForm ? 'form.close' : 'common.add')} */}
+      {isForm ? <CreateDrink barCode={barCode} /> : <Text>{t('drink.notExists')}</Text>}
       <CustomButton
-        label={isForm ? `${t('form.close')}` : `${t('common.add')}`}
+        label={`${t(isForm ? 'form.close' : 'common.add')}`}
         onPress={() => setIsForm(!isForm)}
       />
     </View>

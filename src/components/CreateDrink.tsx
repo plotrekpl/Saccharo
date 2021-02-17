@@ -42,8 +42,8 @@ export const CreateDrink: React.FC<IProps> = ({ barCode }) => {
   const handleSubmit = () => {
     const newDrink: IDrink = {
       name: values.name,
-      amountOfSugar: values.amountOfSugar,
-      barCode: barCode,
+      amountOfSugar: +values.amountOfSugar,
+      barCode,
       id: Math.random().toString(),
     };
     dispatch(createDrinkStarted(newDrink));
