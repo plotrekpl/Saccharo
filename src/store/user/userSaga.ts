@@ -1,7 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { IUser, IUserResponse } from 'src/constants';
+import { alertTypes } from 'src/constants/enums/alert';
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
+import alertHandler from 'src/utils/helpers/alertHandler';
 
 import { firebase } from '../../firebase/config';
 import {
@@ -18,14 +20,18 @@ async function handleRegister(email: string, password: string) {
   try {
     response = await auth.createUserWithEmailAndPassword(email, password);
     return JSON.parse(JSON.stringify(response.user!));
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 }
 
 async function handleLogin(email: string, password: string) {
   try {
     response = await auth.signInWithEmailAndPassword(email, password);
     return JSON.parse(JSON.stringify(response.user!));
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 }
 
 function mapResponseToUser(response: any, name?: string): IUserResponse {
@@ -76,6 +82,11 @@ function* userRegisterSaga(action: userTypes.UserRegisterStarted) {
   try {
     yield put(userActions.userRegisterPending());
     const response = yield handleRegister(email, password);
+    if (response.message) {
+      yield put({ type: userTypes.USER_REGISTER_REJECTED, payload: response.message });
+      alertHandler(response.message, alertTypes.alert);
+      return;
+    }
     const data = yield call(mapResponseToUser, response, name);
     yield call(writeUserToDatabase, data.user);
     yield call(saveUserDataToASyncStorage, data);
@@ -91,9 +102,14 @@ function* userLoginSaga(action: userTypes.UserLoginStarted) {
   try {
     yield put(userActions.userLoginPending());
     const response = yield handleLogin(email, password);
+    if (response.message) {
+      yield put({ type: userTypes.USER_LOGIN_REJECTED, payload: response.message });
+      alertHandler(response.message, alertTypes.alert);
+      return;
+    }
     const data = yield call(mapResponseToUser, response);
-    yield put({ type: userTypes.GET_USER_STARTED, payload: data.user.uid });
     yield call(saveUserDataToASyncStorage, data);
+    yield put({ type: userTypes.GET_USER_STARTED, payload: data.user.uid });
     yield put(userActions.userLoginResolved(data.auth));
   } catch (error) {
     yield put(userActions.userLoginRejected(error));
