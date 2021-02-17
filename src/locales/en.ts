@@ -4,9 +4,15 @@ const translation = {
     buttonPositive: 'Ok',
     buttonNegative: 'Cancel',
     save: 'Save',
+    add: 'Add',
   },
   drink: {
     list: 'List of today`s drinks',
+    name: 'Name',
+    sugar: 'Sugar',
+    amountOfSugar: 'Amount of sugar',
+    notExists: 'This drink doesn`t exist in database. Do you want add new drink ?',
+    create: 'Create drink',
   },
   authorization: {
     logIn: 'Log in',
@@ -17,6 +23,7 @@ const translation = {
     email: 'E-mail',
     password: 'Password',
     confirmPassword: 'Confirm password',
+    close: 'Close form',
   },
   validation: {
     nameRequired: 'Name is required',
@@ -26,6 +33,7 @@ const translation = {
     passwordRequired: 'Password is required',
     confirmPasswordMatch: 'Passwords do not match',
     confirmPasswordRequired: 'Confirm password is required',
+    sugarRequired: 'Amount of sugar is required',
   },
   user: {
     profile: 'User profile',

@@ -1,4 +1,4 @@
-import { IAuth, IRegisterCredentials, ILoginCredentials, IUser } from '../../constants';
+import { IAuth, IRegisterCredentials, ILoginCredentials, IUser, IDrink } from '../../constants';
 
 // -------------- USER REGISTER ----------------
 export const USER_REGISTER_STARTED = 'USER_REGISTER_STARTED';
@@ -25,7 +25,11 @@ export const UPDATE_USER_STARTED = 'UPDATE_USER_STARTED';
 export const UPDATE_USER_PENDING = 'UPDATE_USER_PENDING';
 export const UPDATE_USER_RESOLVED = 'UPDATE_USER_RESOLVED';
 export const UPDATE_USER_REJECTED = 'UPDATE_USER_REJECTED';
-
+// ---------------- ADD DRINK -----------------
+export const ADD_DRINK_STARTED = 'ADD_DRINK_STARTED';
+export const ADD_DRINK_PENDING = 'ADD_DRINK_PENDING';
+export const ADD_DRINK_RESOLVED = 'ADD_DRINK_RESOLVED';
+export const ADD_DRINK_REJECTED = 'ADD_DRINK_REJECTED';
 // -------------- USER REGISTER ----------------
 export interface UserRegisterStarted {
   type: typeof USER_REGISTER_STARTED;
@@ -105,6 +109,22 @@ export interface UpdateUserRejected {
   type: typeof UPDATE_USER_REJECTED;
   payload: string;
 }
+// ---------------- ADD DRINK -----------------
+export interface AddDrinkStarted {
+  type: typeof ADD_DRINK_STARTED;
+  payload: IDrink;
+}
+export interface AddDrinkPending {
+  type: typeof ADD_DRINK_PENDING;
+}
+export interface AddDrinkResolved {
+  type: typeof ADD_DRINK_RESOLVED;
+  payload: string;
+}
+export interface AddDrinkRejected {
+  type: typeof ADD_DRINK_REJECTED;
+  payload: string;
+}
 
 export type UserActionType =
   | UserRegisterStarted
@@ -126,4 +146,8 @@ export type UserActionType =
   | UpdateUserStarted
   | UpdateUserPending
   | UpdateUserResolved
-  | UpdateUserRejected;
+  | UpdateUserRejected
+  | AddDrinkStarted
+  | AddDrinkPending
+  | AddDrinkResolved
+  | AddDrinkRejected;

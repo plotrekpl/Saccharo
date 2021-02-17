@@ -1,4 +1,4 @@
-import { ILoginCredentials, IRegisterCredentials, IAuth, IUser } from '../../constants';
+import { ILoginCredentials, IRegisterCredentials, IAuth, IUser, IDrink } from '../../constants';
 import * as userTypes from './userTypes';
 
 export const userRegister = (credentials: IRegisterCredentials): userTypes.UserRegisterStarted => ({
@@ -83,5 +83,21 @@ export const updateUserResolved = (message: string): userTypes.UpdateUserResolve
 });
 export const updateUserRejected = (errorMessage: string): userTypes.UpdateUserRejected => ({
   type: userTypes.UPDATE_USER_REJECTED,
+  payload: errorMessage,
+});
+
+export const addDrinkStarted = (drink: IDrink): userTypes.AddDrinkStarted => ({
+  type: userTypes.ADD_DRINK_STARTED,
+  payload: drink,
+});
+export const addDrinkPending = (): userTypes.AddDrinkPending => ({
+  type: userTypes.ADD_DRINK_PENDING,
+});
+export const addDrinkResolved = (message: string): userTypes.AddDrinkResolved => ({
+  type: userTypes.ADD_DRINK_RESOLVED,
+  payload: message,
+});
+export const addDrinkRejected = (errorMessage: string): userTypes.AddDrinkRejected => ({
+  type: userTypes.ADD_DRINK_REJECTED,
   payload: errorMessage,
 });
