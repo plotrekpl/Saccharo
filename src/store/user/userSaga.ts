@@ -1,6 +1,6 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { IUser, IUserResponse } from 'src/constants';
+import { IDrink, IUser, IUserResponse } from 'src/constants';
 import { alertTypes } from 'src/constants/enums/alert';
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
 import alertHandler from 'src/utils/helpers/alertHandler';
@@ -150,12 +150,31 @@ function* updateUser(action: userTypes.UpdateUserStarted) {
   }
 }
 
+function* addDrinkSaga(action: userTypes.AddDrinkStarted) {
+  const { payload } = action;
+  try {
+    yield put(userActions.addDrinkPending());
+    const drink: IDrink = payload;
+    const user: IUser = yield select((state) => state.userReducer.user);
+    const now = new Date();
+    const data = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+    firebase.default
+      .database()
+      .ref('users/' + user.uid + '/drinks/' + data + `/${drink.barCode}`)
+      .set(drink);
+    yield put(userActions.addDrinkResolved('Added'));
+  } catch (error) {
+    yield put(userActions.addDrinkRejected(error));
+  }
+}
+
 function* watchUserRequest() {
   yield takeLatest(userTypes.USER_REGISTER_STARTED, userRegisterSaga);
   yield takeLatest(userTypes.USER_LOGIN_STARTED, userLoginSaga);
   yield takeLatest(userTypes.USER_LOGOUT_STARTED, logoutUserSaga);
   yield takeLatest(userTypes.GET_USER_STARTED, getUserData);
   yield takeLatest(userTypes.UPDATE_USER_STARTED, updateUser);
+  yield takeLatest(userTypes.ADD_DRINK_STARTED, addDrinkSaga);
 }
 
 const userSaga = watchUserRequest;
