@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -58,14 +58,14 @@ export const CreateDrink: React.FC<IProps> = ({ barCode }) => {
 
   return (
     <View>
-      <Text>{t('drink.name')}</Text>
+      <Text style={styles.titile}>{t('drink.name')}</Text>
       <CustomTextInput
         onChangeText={handleChange('name')}
         error={errors.name}
         value={values.name}
         placeholder={`${t('drink.name')}`}
       />
-      <Text>{t('drink.amountOfSugar')}</Text>
+      <Text style={styles.titile}>{t('drink.amountOfSugar')}</Text>
       <CustomTextInput
         onChangeText={handleChange('amountOfSugar')}
         error={errors.amountOfSugar}
@@ -80,3 +80,10 @@ export const CreateDrink: React.FC<IProps> = ({ barCode }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  titile: {
+    fontFamily: 'Rajdhani-Medium',
+    fontSize: 18,
+  },
+});

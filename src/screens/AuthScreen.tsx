@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { CustomButton, Layout, Login, Register } from 'src/components';
 
-export const RegisterScreen: React.FC = () => {
+export const AuthScreen: React.FC = () => {
   const { t } = useTranslation();
   const [isSignUp, setIsSignUp] = useState<boolean>(true);
   return (

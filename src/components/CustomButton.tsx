@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, ActivityIndicator, ViewStyle } from 'react-native';
 
-import { palette } from 'src/styles/palette';
+import { palette, shadow } from 'src/styles/palette';
 
 interface Props {
   label: string;
@@ -34,22 +34,21 @@ export const CustomButton: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   button: {
-    width: '100%',
     marginVertical: 10,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: palette.blue,
-    borderColor: palette.blueSapphire,
-    borderWidth: 2,
-    borderRadius: 10,
+    backgroundColor: palette.orange,
+    borderRadius: 15,
+    ...shadow,
   },
   label: {
-    color: palette.blueSapphire,
+    color: palette.white,
+    fontFamily: 'Rajdhani-Bold',
     textTransform: 'uppercase',
-    fontSize: 16,
+    fontSize: 22,
   },
   disabled: {
-    backgroundColor: palette.gray,
-    borderColor: palette.gray,
+    backgroundColor: palette.lightOrange,
+    borderColor: palette.black,
   },
 });

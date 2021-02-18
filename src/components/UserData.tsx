@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -49,7 +49,7 @@ export const UserData: React.FC = () => {
 
   return (
     <View>
-      <Text>{t('user.name')}:</Text>
+      <Text style={styles.title}>{t('user.name')}:</Text>
       <CustomTextInput
         error={errors.name}
         onChangeText={handleChange('name')}
@@ -64,3 +64,10 @@ export const UserData: React.FC = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontFamily: 'Rajdhani-Medium',
+    fontSize: 18,
+  },
+});

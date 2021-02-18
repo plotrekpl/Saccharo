@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IDrink } from 'src/constants';
@@ -19,9 +19,20 @@ export const ListDrinks: React.FC = () => {
 
   return (
     <ScrollView>
-      {drinks.map((drink) => (
-        <Drink key={drink.barCode} drink={drink} />
-      ))}
+      <View style={styles.wrapper}>
+        {drinks.map((drink) => (
+          <Drink key={drink.barCode} drink={drink} />
+        ))}
+      </View>
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+});

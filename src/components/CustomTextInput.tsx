@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 
-import { palette } from 'src/styles/palette';
+import { palette, shadow } from 'src/styles/palette';
 
 interface CustomTextInputProps {
   onChangeText: (text: string) => void;
@@ -40,14 +40,20 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: palette.white,
     paddingLeft: 10,
-    borderRadius: 10,
-    shadowColor: palette.black,
-    shadowOffset: { width: 20, height: 20 },
-    shadowRadius: 1,
-    shadowOpacity: 0.9,
-    elevation: 5,
+    borderRadius: 15,
+    fontFamily: 'Rajdhani-Light',
+    ...shadow,
   },
   error: {
     color: palette.orangeRed,
+    shadowColor: palette.black,
+    fontFamily: 'Rajdhani-Bold',
+    textShadowColor: palette.black,
+    textShadowOffset: {
+      height: 1,
+      width: 1,
+    },
+    textShadowRadius: 1,
+    paddingLeft: 5,
   },
 });

@@ -5,15 +5,18 @@ import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { alertTypes } from 'src/constants/enums/alert';
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
-import { HomeScreen, RegisterScreen, UserScreen, ScanScreen } from 'src/screens';
+import { HomeScreen, AuthScreen, UserScreen, ScanScreen } from 'src/screens';
 import { AppState } from 'src/store/store';
 import { getUserStarted } from 'src/store/user/userActions';
+import { palette } from 'src/styles/palette';
+import alertHandler from 'src/utils/helpers/alertHandler';
 import { getFromAsyncStorage } from 'src/utils/helpers/asyncStorageHelpers';
 
 import { Routes } from '../constants/enums/routes';
 
-const RootNavigator = () => {
+const RootNavigator: React.FC = () => {
   const { user } = useSelector((state: AppState) => state.userReducer);
   const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
@@ -27,7 +30,7 @@ const RootNavigator = () => {
       }
       dispatch(getUserStarted(userData.uid));
     } catch (error) {
-      console.log(error);
+      alertHandler(error, alertTypes.alert);
     }
   };
 
@@ -38,7 +41,17 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       {user?.uid ? (
-        <Tab.Navigator>
+        <Tab.Navigator
+          tabBarOptions={{
+            labelStyle: {
+              fontSize: 22,
+              fontFamily: 'Rajdhani-Medium',
+              alignItems: 'center',
+              width: 100,
+              height: 40,
+            },
+            activeTintColor: palette.orange,
+          }}>
           <Tab.Screen name={Routes.HomeScreen} component={HomeScreen} />
           <Tab.Screen name={Routes.UserScreen} component={UserScreen} />
           <Tab.Screen name={Routes.ScanScreen} component={ScanScreen} />
@@ -47,7 +60,7 @@ const RootNavigator = () => {
         <Stack.Navigator>
           <Stack.Screen
             name={Routes.RegisterScreen}
-            component={RegisterScreen}
+            component={AuthScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, View } from 'react-native';
+import { Modal, StyleSheet, View } from 'react-native';
 
 import { CustomButton } from './CustomButton';
 import { BaseModal } from './index';
@@ -13,7 +13,12 @@ interface IProps {
 export const CustomModal: React.FC<IProps> = ({ isVisible, onClose, children }) => {
   const { t } = useTranslation();
   return (
-    <Modal visible={isVisible} animationType="slide">
+    <Modal
+      visible={isVisible}
+      animationType="slide"
+      presentationStyle="overFullScreen"
+      transparent
+      style={styles.modalView}>
       <BaseModal>
         <View>{children}</View>
         <CustomButton label={t('modal.closeModal')} onPress={() => onClose(!isVisible)} />
@@ -21,3 +26,9 @@ export const CustomModal: React.FC<IProps> = ({ isVisible, onClose, children }) 
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  modalView: {
+    position: 'relative',
+  },
+});
