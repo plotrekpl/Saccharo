@@ -3,16 +3,19 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { IDrink } from 'src/constants';
 import { AppState } from 'src/store/store';
 import { addDrinkStarted } from 'src/store/user/userActions';
 
 import { CustomButton } from './CustomButton';
 
-export const AddDrink: React.FC = () => {
+interface IProps {
+  drink: IDrink;
+}
+
+export const ShowDrink: React.FC<IProps> = ({ drink }) => {
   const { t } = useTranslation();
-  const { drink } = useSelector((state: AppState) => state.drinkReducer);
   const dispatch = useDispatch();
-  console.log(drink);
 
   return (
     <View>
@@ -21,10 +24,10 @@ export const AddDrink: React.FC = () => {
         <Text>{t('drink.sugar')}</Text>
       </View>
       <View style={styles.drinkWrapper}>
-        <Text>{drink?.name}</Text>
-        <Text>{drink?.amountOfSugar}</Text>
+        <Text>{drink.name}</Text>
+        <Text>{drink.amountOfSugar}</Text>
       </View>
-      <CustomButton label={t('common.add')} onPress={() => dispatch(addDrinkStarted(drink!))} />
+      <CustomButton label={t('common.add')} onPress={() => dispatch(addDrinkStarted(drink))} />
     </View>
   );
 };

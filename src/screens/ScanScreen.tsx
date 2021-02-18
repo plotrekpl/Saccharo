@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CustomModal, Scan } from 'src/components';
-import { AddDrink } from 'src/components/AddDrink';
+import { CustomModal, Scan, ShowDrink } from 'src/components';
 import { ScanInformation } from 'src/components/ScanInformation';
 import { AppState } from 'src/store/store';
 
@@ -16,10 +15,8 @@ export const ScanScreen: React.FC = () => {
     <>
       <Scan isVisible={isVisible} showModal={setVisible} setBarCode={setBarCode} />
       <CustomModal isVisible={isVisible} onClose={setVisible}>
-        {drink ? <AddDrink /> : <ScanInformation barCode={barCode} />}
+        {drink ? <ShowDrink drink={drink} /> : <ScanInformation barCode={barCode} />}
       </CustomModal>
     </>
   );
 };
-
-export default ScanScreen;

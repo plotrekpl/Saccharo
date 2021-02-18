@@ -9,5 +9,6 @@ export { Layout } from './Layout';
 export { Login } from './auth/Login';
 export { Register } from './auth/Register';
 export { Scan } from './Scan';
+export { ShowDrink } from './ShowDrink';
 export { CreateDrink } from './CreateDrink';
 export { ScanInformation } from './ScanInformation';
