@@ -17,7 +17,7 @@ After npm install you must change files in node-modules
 ## Start App
 
 After installation, run app with command.
-
+<!-- Please remember that React Native is used to build app for both Android and iOS, if you use platform specific commands be aware they will work only for specified platform-->
 ```npm
 npx react-native run-android
 ```

@@ -29,10 +29,12 @@ const RootNavigator: React.FC = () => {
         return;
       }
       dispatch(getUserStarted(userData.uid));
+      /** Why error handler was removed? */
     } catch (error) {}
   };
 
   useEffect(() => {
+    /** You did not handle Promise returned from try login, Are you sure you will get the response consistently each time it is executed? */
     tryLogin();
   }, []);
 

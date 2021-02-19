@@ -10,6 +10,7 @@ interface IProps {
   drink: IDrink;
 }
 
+/** Name is not specific and can be interpreted differently, please consider more descriptive name like : drinkImage. */
 const drinkURI = require('../image/Pepsi.png');
 
 export const Drink: React.FC<IProps> = ({ drink }) => {

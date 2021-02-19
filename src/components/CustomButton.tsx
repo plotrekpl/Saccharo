@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: palette.orange,
     borderRadius: 15,
+    /** Please check comment below, as it is the same situation but different example */
     ...shadow,
   },
   label: {
@@ -52,6 +53,9 @@ const styles = StyleSheet.create({
     borderColor: palette.black,
   },
   loading: {
+    /** You should spread object first and the overwrite any object parameter.
+     * With current syntax, if 'clearShadow' contain backgroundColor it will overwrite your parameter and you will loose time to find the reason.
+     * In case you want backgroundColor from clearShadow, the backgroundColor part is redundant */
     backgroundColor: palette.transparent,
     ...clearShadow,
   },
