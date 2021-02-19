@@ -29,9 +29,7 @@ const RootNavigator: React.FC = () => {
         return;
       }
       dispatch(getUserStarted(userData.uid));
-    } catch (error) {
-      alertHandler(error, alertTypes.alert);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

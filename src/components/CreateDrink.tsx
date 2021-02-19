@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 import { IDrink } from 'src/constants';
 import { createDrinkStarted } from 'src/store/drink/drinkActions';
 
-import { CustomTextInput } from '.';
 import { CustomButton } from './CustomButton';
+import { CustomTextInput } from './CustomTextInput';
 
 interface ICreateDrink {
   id: string;
@@ -58,14 +58,14 @@ export const CreateDrink: React.FC<IProps> = ({ barCode }) => {
 
   return (
     <View>
-      <Text style={styles.titile}>{t('drink.name')}</Text>
+      <Text style={styles.title}>{t('drink.name')}</Text>
       <CustomTextInput
         onChangeText={handleChange('name')}
         error={errors.name}
         value={values.name}
         placeholder={`${t('drink.name')}`}
       />
-      <Text style={styles.titile}>{t('drink.amountOfSugar')}</Text>
+      <Text style={styles.title}>{t('drink.amountOfSugar')}</Text>
       <CustomTextInput
         onChangeText={handleChange('amountOfSugar')}
         error={errors.amountOfSugar}
@@ -82,7 +82,7 @@ export const CreateDrink: React.FC<IProps> = ({ barCode }) => {
 };
 
 const styles = StyleSheet.create({
-  titile: {
+  title: {
     fontFamily: 'Rajdhani-Medium',
     fontSize: 18,
   },

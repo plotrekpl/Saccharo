@@ -6,7 +6,7 @@ import { IDrink } from 'src/constants';
 import { getDrinksStarted } from 'src/store/drink/drinkActions';
 import { AppState } from 'src/store/store';
 
-import { Drink } from '.';
+import { Drink } from './Drink';
 
 export const ListDrinks: React.FC = () => {
   const drinks: IDrink[] = useSelector((state: AppState) => state.drinkReducer.drinks);

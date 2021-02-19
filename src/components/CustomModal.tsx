@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, StyleSheet, View } from 'react-native';
 
+import { BaseModal } from './BaseModal';
 import { CustomButton } from './CustomButton';
-import { BaseModal } from './index';
 
 interface IProps {
   isVisible: boolean;

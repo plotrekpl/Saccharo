@@ -9,7 +9,8 @@ import { IUser } from 'src/constants';
 import { AppState } from 'src/store/store';
 import { updateUserStarted } from 'src/store/user/userActions';
 
-import { CustomButton, CustomTextInput } from './index';
+import { CustomButton } from './CustomButton';
+import { CustomTextInput } from './CustomTextInput';
 
 interface IInitialValues {
   name: string;
