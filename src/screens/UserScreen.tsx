@@ -8,6 +8,8 @@ import { AppState } from 'src/store/store';
 import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
 
+const waveURI = require('../image/Wave.png');
+
 export const UserScreen: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
   const { name } = useSelector((state: AppState) => state.userReducer.user!);
@@ -25,8 +27,8 @@ export const UserScreen: React.FC = () => {
             <Text style={styles.userElement}>{name}</Text>
           </View>
         </View>
-        <Image style={styles.wave} source={require('../image/Wave.png')} />
-        <Image style={styles.waveSecond} source={require('../image/Wave.png')} />
+        <Image style={styles.wave} source={waveURI} />
+        <Image style={styles.waveSecond} source={waveURI} />
       </View>
       <View style={styles.buttonWrapper}>
         <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />

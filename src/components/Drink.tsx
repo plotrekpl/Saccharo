@@ -10,6 +10,8 @@ interface IProps {
   drink: IDrink;
 }
 
+const drinkURI = require('../image/Pepsi.png');
+
 export const Drink: React.FC<IProps> = ({ drink }) => {
   const { t } = useTranslation();
   return (
@@ -20,7 +22,7 @@ export const Drink: React.FC<IProps> = ({ drink }) => {
         <Text style={styles.drinkSugar}>{drink.amountOfSugar}</Text>
       </Text>
       <View style={styles.drinkImage}>
-        <Image source={require('../image/Pepsi.png')} />
+        <Image source={drinkURI} />
       </View>
     </LinearGradient>
   );

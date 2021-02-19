@@ -4,6 +4,8 @@ import { View, StyleSheet, Text, SafeAreaView, ImageBackground, Image } from 're
 
 import { palette } from 'src/styles/palette';
 
+const backgroundImageURI = require('../image/Logo.png');
+
 export const Layout: React.FC = ({ children }) => {
   const { t } = useTranslation();
   return (
@@ -11,7 +13,7 @@ export const Layout: React.FC = ({ children }) => {
       <ImageBackground source={require('../image/background.jpg')} style={styles.layout}>
         <View style={styles.wrapper}>
           <View style={styles.logoWrapper}>
-            <Image source={require('../image/Logo.png')} />
+            <Image source={backgroundImageURI} />
             <Text style={styles.appTitle}>{t('common.title')}</Text>
           </View>
           <View style={styles.childrenWrapper}>{children}</View>
