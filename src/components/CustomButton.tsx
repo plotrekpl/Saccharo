@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, ActivityIndicator, ViewStyle } from 'react-native';
 
-import { palette, shadow } from 'src/styles/palette';
+import { clearShadow, palette, shadow } from 'src/styles/palette';
 
 interface Props {
   label: string;
@@ -20,11 +20,11 @@ export const CustomButton: React.FC<Props> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[styles.button, customStyles, disabled && styles.disabled]}
+      style={[styles.button, customStyles, disabled && styles.disabled, loading && styles.loading]}
       onPress={onPress}
       disabled={disabled}>
       {loading ? (
-        <ActivityIndicator color={palette.orangeRed} />
+        <ActivityIndicator color={palette.orange} size={48} />
       ) : (
         <Text style={styles.label}>{label}</Text>
       )}
@@ -50,5 +50,9 @@ const styles = StyleSheet.create({
   disabled: {
     backgroundColor: palette.lightOrange,
     borderColor: palette.black,
+  },
+  loading: {
+    backgroundColor: palette.transparent,
+    ...clearShadow,
   },
 });
