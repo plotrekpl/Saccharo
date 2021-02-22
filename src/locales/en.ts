@@ -1,6 +1,6 @@
 const translation = {
   common: {
-    title: 'QofSugar',
+    title: 'Saccharo',
     buttonPositive: 'Ok',
     buttonNegative: 'Cancel',
     save: 'Save',
@@ -10,9 +10,11 @@ const translation = {
     list: 'List of today`s drinks',
     name: 'Name',
     sugar: 'Sugar',
-    amountOfSugar: 'Amount of sugar',
-    notExists: 'This drink doesn`t exist in database. Do you want add new drink ?',
+    amountOfSugar: 'Amount of sugar: ',
+    notExists: 'This drink doesn`t exist in database.',
+    addDrink: 'Do you want add drink ?',
     create: 'Create drink',
+    drink: 'Drink',
   },
   authorization: {
     logIn: 'Log in',
@@ -46,6 +48,9 @@ const translation = {
   },
   modal: {
     closeModal: 'Close modal',
+  },
+  alert: {
+    missingID: 'Your session has expired',
   },
 };
 

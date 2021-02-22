@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
 
 import { Layout, ListDrinks } from 'src/components';
+import { palette } from 'src/styles/palette';
 
 export const HomeScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -18,10 +19,14 @@ export const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   homeTitle: {
-    alignItems: 'center',
-    marginVertical: 30,
+    alignItems: 'flex-start',
+    marginVertical: 15,
+    marginHorizontal: 15,
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
+    fontFamily: 'Rajdhani-Bold',
+    textTransform: 'uppercase',
+    color: palette.orange,
   },
 });

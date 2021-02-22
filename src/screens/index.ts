@@ -1,4 +1,4 @@
 export { HomeScreen } from './HomeScreen';
 export { UserScreen } from './UserScreen';
-export { RegisterScreen } from './RegisterScreen';
+export { AuthScreen } from './AuthScreen';
 export { ScanScreen } from './ScanScreen';
