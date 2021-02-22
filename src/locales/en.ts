@@ -11,8 +11,11 @@ const translation = {
     name: 'Name',
     sugar: 'Sugar',
     amountOfSugar: 'Amount of sugar',
+    /** use correct English: ... Do you want to add a new drink */
     notExists: 'This drink doesn`t exist in database. Do you want add new drink ?',
+    /** use correct English: ... Create a drink */
     create: 'Create drink',
+    /** Please check the english sentence, if place holder use correct English : You haven't got any drink */
     missingDrink: 'You haven`t a drink',
   },
   authorization: {
@@ -29,6 +32,7 @@ const translation = {
   validation: {
     nameRequired: 'Name is required',
     emailRequired: 'Email address is required',
+    /** use correct English: ...enter a valid... */
     emailValid: 'Please enter valid email',
     passwordMinLength: 'Password must be at least {{min}} characters',
     passwordRequired: 'Password is required',
