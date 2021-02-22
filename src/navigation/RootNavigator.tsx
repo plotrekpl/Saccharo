@@ -2,10 +2,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { alertTypes } from 'src/constants/enums/alert';
+import { alertMessage, alertTypes } from 'src/constants/enums/alert';
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
 import { HomeScreen, AuthScreen, UserScreen, ScanScreen } from 'src/screens';
 import { AppState } from 'src/store/store';
@@ -18,6 +19,7 @@ import { Routes } from '../constants/enums/routes';
 
 const RootNavigator: React.FC = () => {
   const { user } = useSelector((state: AppState) => state.userReducer);
+  const { t } = useTranslation;
   const dispatch = useDispatch();
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -29,12 +31,12 @@ const RootNavigator: React.FC = () => {
         return;
       }
       dispatch(getUserStarted(userData.uid));
-      /** Why error handler was removed? */
-    } catch (error) {}
+    } catch (error) {
+      alertHandler(alertMessage.missingID, alertTypes.alert);
+    }
   };
 
   useEffect(() => {
-    /** You did not handle Promise returned from try login, Are you sure you will get the response consistently each time it is executed? */
     tryLogin();
   }, []);
 

@@ -49,6 +49,9 @@ const translation = {
   modal: {
     closeModal: 'Close modal',
   },
+  alert: {
+    missingID: 'Your session has expired',
+  },
 };
 
 export default translation;

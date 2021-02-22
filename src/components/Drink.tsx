@@ -10,8 +10,7 @@ interface IProps {
   drink: IDrink;
 }
 
-/** Name is not specific and can be interpreted differently, please consider more descriptive name like : drinkImage. */
-const drinkURI = require('../image/Pepsi.png');
+const drinkImageURI = require('../image/Pepsi.png');
 
 export const Drink: React.FC<IProps> = ({ drink }) => {
   const { t } = useTranslation();
@@ -23,7 +22,7 @@ export const Drink: React.FC<IProps> = ({ drink }) => {
         <Text style={styles.drinkSugar}>{drink.amountOfSugar}</Text>
       </Text>
       <View style={styles.drinkImage}>
-        <Image source={drinkURI} />
+        <Image source={drinkImageURI} />
       </View>
     </LinearGradient>
   );
