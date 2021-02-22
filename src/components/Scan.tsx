@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { BarCodeReadEvent, RNCamera } from 'react-native-camera';
 import { useDispatch } from 'react-redux';
 
@@ -15,35 +15,13 @@ interface IProps {
 export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [isBarcodeRead, setIsBarcodeRead] = useState(false);
-  const [barcodeType, setBarcodeType] = useState('');
-  const [barcodeValue, setBarcodeValue] = useState('');
-
-  useEffect(() => {
-    if (isBarcodeRead) {
-      Alert.alert(barcodeType, barcodeValue, [
-        {
-          text: 'OK',
-          onPress: () => {
-            setIsBarcodeRead(false);
-            setBarcodeType('');
-            setBarcodeValue('');
-            dispatch(getDrinkStarted(barcodeValue));
-            setBarCode(barcodeValue);
-            showModal(!isVisible);
-          },
-        },
-      ]);
-    }
-  }, [isBarcodeRead, barcodeType, barcodeValue]);
 
   const onBarcodeRead = (event: BarCodeReadEvent) => {
-    if (!isBarcodeRead) {
-      setIsBarcodeRead(true);
-      setBarcodeType(event.type);
-      setBarcodeValue(event.data);
-    }
+    dispatch(getDrinkStarted(event.data));
+    setBarCode(event.data);
+    showModal(true);
   };
+
   return (
     <RNCamera
       style={styles.preview}
@@ -55,7 +33,7 @@ export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => 
         buttonPositive: `${t('common.buttonPositive')}`,
         buttonNegative: `${t('common.buttonNegative')}`,
       }}
-      onBarCodeRead={onBarcodeRead}
+      onBarCodeRead={!isVisible ? onBarcodeRead : undefined}
     />
   );
 };
