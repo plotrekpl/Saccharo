@@ -11,9 +11,9 @@ const translation = {
     name: 'Name',
     sugar: 'Sugar',
     amountOfSugar: 'Amount of sugar',
-    notExists: 'This drink doesn`t exist in database. Do you want add new drink ?',
-    create: 'Create drink',
-    missingDrink: 'You haven`t a drink',
+    notExists: 'This drink doesn`t exist in database. Do you want to add a new drink ?',
+    create: 'Create a drink',
+    missingDrink: 'You haven`t got a drink',
   },
   authorization: {
     logIn: 'Log in',
@@ -29,7 +29,7 @@ const translation = {
   validation: {
     nameRequired: 'Name is required',
     emailRequired: 'Email address is required',
-    emailValid: 'Please enter valid email',
+    emailValid: 'Please enter a valid email',
     passwordMinLength: 'Password must be at least {{min}} characters',
     passwordRequired: 'Password is required',
     confirmPasswordMatch: 'Passwords do not match',
