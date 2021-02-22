@@ -1,25 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { IDrink } from 'src/constants';
-import { getDrinksStarted } from 'src/store/drink/drinkActions';
-import { AppState } from 'src/store/store';
 
 import { Drink } from '.';
 
-export const ListDrinks: React.FC = () => {
-  const drinks: IDrink[] = useSelector((state: AppState) => state.drinkReducer.drinks);
+interface IProps {
+  drinks: IDrink[];
+}
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getDrinksStarted());
-  }, []);
-
+export const ListDrinks: React.FC<IProps> = ({ drinks }) => {
   return (
     <ScrollView>
-      {drinks.map((drink) => (
+      {drinks!.map((drink) => (
         <Drink key={drink.barCode} drink={drink} />
       ))}
     </ScrollView>

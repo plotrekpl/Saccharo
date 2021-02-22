@@ -15,6 +15,8 @@ import * as userTypes from './userTypes';
 
 const auth = firebase.default.auth();
 let response;
+const now = new Date();
+const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 
 async function handleRegister(email: string, password: string) {
   try {
@@ -58,9 +60,19 @@ function writeUserToDatabase(user: IUser) {
 }
 
 async function fetchUserData(uid: string) {
-  const users = firebase.default.database().ref(`users/${uid}`);
-  const snapshot = await users.once('value');
-  return snapshot.val();
+  const userRef = firebase.default.database().ref(`users/${uid}`);
+  const snapshot = await userRef.once('value');
+  const user = snapshot.val();
+  const userDrinks: IDrink[] = user.drinks;
+  let todaysDrinks: IDrink[] = [];
+  for (const [key, value] of Object.entries(userDrinks)) {
+    todaysDrinks = key === date ? (todaysDrinks = Object.values(value)) : [];
+  }
+  const data = {
+    ...user,
+    drinks: todaysDrinks,
+  };
+  return data;
 }
 
 function updateUserInDatabase(user: IUser) {
@@ -156,12 +168,12 @@ function* addDrinkSaga(action: userTypes.AddDrinkStarted) {
     yield put(userActions.addDrinkPending());
     const drink: IDrink = payload;
     const user: IUser = yield select((state) => state.userReducer.user);
-    const now = new Date();
-    const data = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+
     firebase.default
       .database()
-      .ref('users/' + user.uid + '/drinks/' + data + `/${drink.barCode}`)
+      .ref('users/' + user.uid + '/drinks/' + date + `/${drink.barCode}`)
       .set(drink);
+    yield put({ type: userTypes.GET_USER_STARTED, payload: user.uid });
     yield put(userActions.addDrinkResolved('Added'));
   } catch (error) {
     yield put(userActions.addDrinkRejected(error));

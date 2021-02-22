@@ -13,6 +13,7 @@ const translation = {
     amountOfSugar: 'Amount of sugar',
     notExists: 'This drink doesn`t exist in database. Do you want add new drink ?',
     create: 'Create drink',
+    missingDrink: 'You haven`t a drink',
   },
   authorization: {
     logIn: 'Log in',
