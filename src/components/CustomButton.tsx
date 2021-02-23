@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, ActivityIndicator, ViewStyle } from 'react-native';
 
-import { palette } from 'src/styles/palette';
+import { clearShadow, palette, shadow } from 'src/styles/palette';
 
 interface Props {
   label: string;
@@ -20,11 +20,11 @@ export const CustomButton: React.FC<Props> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[styles.button, customStyles, disabled && styles.disabled]}
+      style={[styles.button, customStyles, disabled && styles.disabled, loading && styles.loading]}
       onPress={onPress}
       disabled={disabled}>
       {loading ? (
-        <ActivityIndicator color={palette.orangeRed} />
+        <ActivityIndicator color={palette.orange} size={48} />
       ) : (
         <Text style={styles.label}>{label}</Text>
       )}
@@ -34,22 +34,25 @@ export const CustomButton: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   button: {
-    width: '100%',
+    ...shadow,
     marginVertical: 10,
     padding: 10,
     alignItems: 'center',
-    backgroundColor: palette.blue,
-    borderColor: palette.blueSapphire,
-    borderWidth: 2,
-    borderRadius: 10,
+    backgroundColor: palette.orange,
+    borderRadius: 15,
   },
   label: {
-    color: palette.blueSapphire,
+    color: palette.white,
+    fontFamily: 'Rajdhani-Bold',
     textTransform: 'uppercase',
-    fontSize: 16,
+    fontSize: 22,
   },
   disabled: {
-    backgroundColor: palette.gray,
-    borderColor: palette.gray,
+    backgroundColor: palette.lightOrange,
+    borderColor: palette.black,
+  },
+  loading: {
+    ...clearShadow,
+    backgroundColor: palette.transparent,
   },
 });

@@ -1,13 +1,16 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { ActivityIndicator, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-import { CustomTextInput, CustomButton } from 'src/components';
+import { CustomButton } from 'src/components/CustomButton';
+import { CustomTextInput } from 'src/components/CustomTextInput';
 import { ILoginCredentials } from 'src/constants';
+import { AppState } from 'src/store/store';
 import { userLoginStarted } from 'src/store/user/userActions';
+import { palette } from 'src/styles/palette';
 
 interface ILoginUser {
   email: string;
@@ -21,6 +24,7 @@ const initialValues: ILoginUser = {
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state: AppState) => state.userReducer);
   const { t } = useTranslation();
   const validationSchema = () =>
     Yup.object({
@@ -50,24 +54,28 @@ export const Login: React.FC = () => {
 
   return (
     <View>
-      <CustomTextInput
-        error={errors.email}
-        onChangeText={handleChange('email')}
-        value={values.email}
-        placeholder={t('form.email')}
-      />
-      <CustomTextInput
-        error={errors.password}
-        onChangeText={handleChange('password')}
-        value={values.password}
-        placeholder={t('form.password')}
-        securePassword
-      />
-      <CustomButton
-        onPress={handleSubmit}
-        label={t('authorization.logIn')}
-        disabled={!isValid || !dirty}
-      />
+      {!loading ? (
+        <>
+          <CustomTextInput
+            error={errors.email}
+            onChangeText={handleChange('email')}
+            value={values.email}
+            placeholder={t('form.email')}
+          />
+          <CustomTextInput
+            error={errors.password}
+            onChangeText={handleChange('password')}
+            value={values.password}
+            placeholder={t('form.password')}
+            securePassword
+          />
+          <CustomButton
+            onPress={handleSubmit}
+            label={t('authorization.logIn')}
+            disabled={!isValid || !dirty}
+          />
+        </>
+      ) : null}
     </View>
   );
 };

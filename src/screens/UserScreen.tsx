@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CustomButton, Layout, UserData, CustomModal } from 'src/components';
 import { AppState } from 'src/store/store';
 import { userLogoutStarted } from 'src/store/user/userActions';
 import { palette } from 'src/styles/palette';
+
+const waveURI = require('../image/Wave.png');
 
 export const UserScreen: React.FC = () => {
   const [isVisible, setVisible] = useState(false);
@@ -25,12 +27,16 @@ export const UserScreen: React.FC = () => {
             <Text style={styles.userElement}>{name}</Text>
           </View>
         </View>
+        <Image style={styles.wave} source={waveURI} />
+        <Image style={styles.waveSecond} source={waveURI} />
       </View>
-      <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
-      <CustomModal isVisible={isVisible} onClose={setVisible}>
-        <UserData />
-      </CustomModal>
-      <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
+      <View style={styles.buttonWrapper}>
+        <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
+        <CustomModal isVisible={isVisible} onClose={setVisible}>
+          <UserData />
+        </CustomModal>
+        <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
+      </View>
     </Layout>
   );
 };
@@ -40,29 +46,46 @@ const styles = StyleSheet.create({
     flex: 1,
     marginVertical: 50,
     alignItems: 'center',
+    position: 'relative',
   },
   avatar: {
     width: 150,
     height: 150,
     borderRadius: 150,
-    backgroundColor: palette.gray,
+    backgroundColor: palette.white,
+    borderWidth: 10,
   },
   title: {
-    marginVertical: 20,
-    fontSize: 24,
+    marginVertical: 10,
+    fontSize: 32,
     textTransform: 'uppercase',
-    letterSpacing: 2,
+    fontFamily: 'Rajdhani-Bold',
   },
   user: {
     width: '80%',
   },
   userInfo: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    paddingVertical: 10,
+    justifyContent: 'center',
+    paddingVertical: 5,
   },
   userElement: {
-    fontSize: 18,
-    textTransform: 'uppercase',
+    fontSize: 25,
+    fontFamily: 'Rajdhani-Bold',
+    marginHorizontal: 5,
+  },
+  wave: {
+    position: 'absolute',
+    left: -50,
+    top: 5,
+  },
+  waveSecond: {
+    position: 'absolute',
+    transform: [{ rotateY: '180deg' }, { rotateX: '180deg' }],
+    top: -50,
+    right: -50,
+  },
+  buttonWrapper: {
+    marginHorizontal: 50,
   },
 });

@@ -3,3 +3,7 @@ export enum alertTypes {
   warning = 'WARNING',
   success = 'SUCCESS',
 }
+
+export enum alertMessage {
+  missingID = 'Your session has expired',
+}

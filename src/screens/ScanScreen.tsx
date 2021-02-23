@@ -10,7 +10,6 @@ export const ScanScreen: React.FC = () => {
   const [barCode, setBarCode] = useState<string>('');
   const { drink } = useSelector((state: AppState) => state.drinkReducer);
 
-  console.log('ScanScreen:', barCode);
   return (
     <>
       <Scan isVisible={isVisible} showModal={setVisible} setBarCode={setBarCode} />

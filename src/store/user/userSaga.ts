@@ -62,16 +62,22 @@ function writeUserToDatabase(user: IUser) {
 async function fetchUserData(uid: string) {
   const userRef = firebase.default.database().ref(`users/${uid}`);
   const snapshot = await userRef.once('value');
-  const user = snapshot.val();
-  const userDrinks: IDrink[] = user.drinks;
   let todaysDrinks: IDrink[] = [];
-  for (const [key, value] of Object.entries(userDrinks)) {
-    todaysDrinks = key === date ? (todaysDrinks = Object.values(value)) : [];
+  const user = snapshot.val();
+  if (user.drinks) {
+    const userDrinks: IDrink[] = user.drinks;
+    for (const [key, value] of Object.entries(userDrinks)) {
+      todaysDrinks = key === date ? (todaysDrinks = Object.values(value)) : [];
+    }
+  } else {
+    todaysDrinks = [];
   }
+
   const data = {
     ...user,
     drinks: todaysDrinks,
   };
+
   return data;
 }
 

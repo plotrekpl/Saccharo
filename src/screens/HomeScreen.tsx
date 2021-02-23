@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { Layout, ListDrinks } from 'src/components';
 import { AppState } from 'src/store/store';
+import { palette } from 'src/styles/palette';
 
 export const HomeScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ export const HomeScreen: React.FC = () => {
       {user && user.drinks?.length ? (
         <ListDrinks drinks={user.drinks} />
       ) : (
-        <Text>{t('drink.missingDrink')}</Text>
+        <Text style={styles.information}>{t('drink.missingDrink')}</Text>
       )}
     </Layout>
   );
@@ -26,10 +27,20 @@ export const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   homeTitle: {
-    alignItems: 'center',
-    marginVertical: 30,
+    alignItems: 'flex-start',
+    marginVertical: 15,
+    marginHorizontal: 15,
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
+    fontFamily: 'Rajdhani-Bold',
+    textTransform: 'uppercase',
+    color: palette.orange,
+  },
+  information: {
+    fontSize: 26,
+    fontFamily: 'Rajdhani-Bold',
+    textTransform: 'uppercase',
+    marginHorizontal: 15,
   },
 });

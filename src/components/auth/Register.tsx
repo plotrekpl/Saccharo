@@ -2,11 +2,13 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-import { CustomTextInput, CustomButton } from 'src/components';
+import { CustomButton } from 'src/components/CustomButton';
+import { CustomTextInput } from 'src/components/CustomTextInput';
 import { IRegisterCredentials } from 'src/constants';
+import { AppState } from 'src/store/store';
 import { userRegister } from 'src/store/user/userActions';
 
 interface IRegisterUser {
@@ -26,6 +28,7 @@ const initialValues: IRegisterUser = {
 export const Register: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { loading } = useSelector((state: AppState) => state.userReducer);
   const validationSchema = () =>
     Yup.object({
       displayName: Yup.string().required(`${t('validation.nameRequired')}`),
@@ -59,37 +62,41 @@ export const Register: React.FC = () => {
 
   return (
     <View>
-      <CustomTextInput
-        error={errors.displayName}
-        onChangeText={handleChange('displayName')}
-        value={values.displayName}
-        placeholder={t('form.name')}
-      />
-      <CustomTextInput
-        error={errors.email}
-        onChangeText={handleChange('email')}
-        value={values.email}
-        placeholder={t('form.email')}
-      />
-      <CustomTextInput
-        error={errors.password}
-        onChangeText={handleChange('password')}
-        value={values.password}
-        placeholder={t('form.password')}
-        securePassword
-      />
-      <CustomTextInput
-        error={errors.confirmPassword}
-        onChangeText={handleChange('confirmPassword')}
-        value={values.confirmPassword}
-        placeholder={t('form.confirmPassword')}
-        securePassword
-      />
-      <CustomButton
-        label={t('authorization.signUp')}
-        onPress={handleSubmit}
-        disabled={!isValid || !dirty}
-      />
+      {!loading ? (
+        <>
+          <CustomTextInput
+            error={errors.displayName}
+            onChangeText={handleChange('displayName')}
+            value={values.displayName}
+            placeholder={t('form.name')}
+          />
+          <CustomTextInput
+            error={errors.email}
+            onChangeText={handleChange('email')}
+            value={values.email}
+            placeholder={t('form.email')}
+          />
+          <CustomTextInput
+            error={errors.password}
+            onChangeText={handleChange('password')}
+            value={values.password}
+            placeholder={t('form.password')}
+            securePassword
+          />
+          <CustomTextInput
+            error={errors.confirmPassword}
+            onChangeText={handleChange('confirmPassword')}
+            value={values.confirmPassword}
+            placeholder={t('form.confirmPassword')}
+            securePassword
+          />
+          <CustomButton
+            label={t('authorization.signUp')}
+            onPress={handleSubmit}
+            disabled={!isValid || !dirty}
+          />
+        </>
+      ) : null}
     </View>
   );
 };

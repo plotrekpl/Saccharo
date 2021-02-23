@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { IDrink } from 'src/constants';
-import { AppState } from 'src/store/store';
 import { addDrinkStarted } from 'src/store/user/userActions';
 
 import { CustomButton } from './CustomButton';
@@ -18,27 +17,48 @@ export const ShowDrink: React.FC<IProps> = ({ drink }) => {
   const dispatch = useDispatch();
 
   return (
-    <View>
-      <View style={styles.describeWrapper}>
-        <Text>{t('drink.name')}</Text>
-        <Text>{t('drink.sugar')}</Text>
+    <View style={styles.drinkWrapper}>
+      <Text style={styles.drinkTitle}>{t('drink.drink')}</Text>
+      <Image source={require('../image/Pepsi.png')} />
+      <View style={styles.drinkDescribe}>
+        <Text style={styles.drinkData}>{t('drink.name')}:</Text>
+        <Text style={styles.drinkData}>{drink.name}</Text>
       </View>
-      <View style={styles.drinkWrapper}>
-        <Text>{drink.name}</Text>
-        <Text>{drink.amountOfSugar}</Text>
+      <View style={styles.drinkDescribe}>
+        <Text style={styles.drinkData}>{t('drink.sugar')}:</Text>
+        <Text style={styles.drinkData}>{drink.amountOfSugar}</Text>
       </View>
-      <CustomButton label={t('common.add')} onPress={() => dispatch(addDrinkStarted(drink))} />
+      <CustomButton
+        label={t('common.add')}
+        onPress={() => dispatch(addDrinkStarted(drink))}
+        customStyles={styles.btn}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  describeWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
   drinkWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  drinkTitle: {
+    fontFamily: 'Rajdhani-Bold',
+    fontSize: 36,
+    marginBottom: 10,
+  },
+  drinkDescribe: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
+    width: 190,
+    marginVertical: 5,
+  },
+  drinkData: {
+    fontFamily: 'Rajdhani-Bold',
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  btn: {
+    width: '100%',
   },
 });

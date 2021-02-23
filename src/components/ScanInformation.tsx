@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { CreateDrink } from './CreateDrink';
 import { CustomButton } from './CustomButton';
@@ -14,7 +14,14 @@ export const ScanInformation: React.FC<IProps> = ({ barCode }) => {
   const { t } = useTranslation();
   return (
     <View>
-      {isForm ? <CreateDrink barCode={barCode} /> : <Text>{t('drink.notExists')}</Text>}
+      {isForm ? (
+        <CreateDrink barCode={barCode} />
+      ) : (
+        <>
+          <Text style={styles.scanInfo}>{t('drink.notExists')}</Text>
+          <Text style={styles.scanInfo}>{t('drink.addDrink')}</Text>
+        </>
+      )}
       <CustomButton
         label={`${t(isForm ? 'form.close' : 'common.add')}`}
         onPress={() => setIsForm(!isForm)}
@@ -22,3 +29,12 @@ export const ScanInformation: React.FC<IProps> = ({ barCode }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  scanInfo: {
+    fontFamily: 'Rajdhani-Bold',
+    fontSize: 24,
+    letterSpacing: 1,
+    marginVertical: 15,
+  },
+});
