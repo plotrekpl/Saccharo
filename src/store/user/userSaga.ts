@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import { IDrink, IUser, IUserResponse } from 'src/constants';
-import { alertTypes } from 'src/constants/enums/alert';
+import { alertMessage, alertTypes } from 'src/constants/enums/alert';
 import { asyncStorageKeys } from 'src/constants/enums/asyncStorageKeys';
 import alertHandler from 'src/utils/helpers/alertHandler';
 
@@ -64,6 +64,7 @@ async function fetchUserData(uid: string) {
   const snapshot = await userRef.once('value');
   let todaysDrinks: IDrink[] = [];
   const user = snapshot.val();
+
   if (user.drinks) {
     const userDrinks: IDrink[] = user.drinks;
     for (const [key, value] of Object.entries(userDrinks)) {
@@ -83,7 +84,13 @@ async function fetchUserData(uid: string) {
 
 function updateUserInDatabase(user: IUser) {
   const userDb = firebase.default.auth().currentUser;
-  return firebase.default.database().ref(`users/${userDb?.uid}`).update(user);
+  if (userDb) {
+    return firebase.default.database().ref(`users/${userDb.uid}`).update({
+      name: user.name,
+    });
+  } else {
+    alertHandler(alertMessage.missingUser, alertTypes.warning);
+  }
 }
 
 function saveUserDataToASyncStorage(data: any) {
