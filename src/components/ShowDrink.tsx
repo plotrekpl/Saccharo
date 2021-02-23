@@ -10,11 +10,17 @@ import { CustomButton } from './CustomButton';
 
 interface IProps {
   drink: IDrink;
+  setVisible: (open: boolean) => void;
 }
 
-export const ShowDrink: React.FC<IProps> = ({ drink }) => {
+export const ShowDrink: React.FC<IProps> = ({ drink, setVisible }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const btnHandler = () => {
+    dispatch(addDrinkStarted(drink));
+    setVisible(false);
+  };
 
   return (
     <View style={styles.drinkWrapper}>
@@ -30,7 +36,7 @@ export const ShowDrink: React.FC<IProps> = ({ drink }) => {
       </View>
       <CustomButton
         label={t('common.add')}
-        onPress={() => dispatch(addDrinkStarted(drink))}
+        onPress={() => btnHandler()}
         customStyles={styles.btn}
       />
     </View>

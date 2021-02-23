@@ -16,7 +16,10 @@ interface IInitialValues {
   name: string;
 }
 
-export const UserData: React.FC = () => {
+interface IProps {
+  onClose: (open: boolean) => void;
+}
+export const UserData: React.FC<IProps> = ({ onClose }) => {
   const { t } = useTranslation();
   const { user } = useSelector((state: AppState) => state.userReducer);
   const dispatch = useDispatch();
@@ -40,6 +43,7 @@ export const UserData: React.FC = () => {
       ...value,
     };
     dispatch(updateUserStarted(newUser));
+    onClose(false);
   };
 
   const { setFieldValue, handleChange, values, errors, isValid, dirty } = useFormik({
