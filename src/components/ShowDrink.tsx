@@ -17,6 +17,7 @@ export const ShowDrink: React.FC<IProps> = ({ drink, setVisible }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  /** Avoid using abbreviations in names. Name should be clear and exclusive */
   const btnHandler = () => {
     dispatch(addDrinkStarted(drink));
     setVisible(false);
