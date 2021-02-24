@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CustomButton, Layout, UserData, CustomModal } from 'src/components';
 import { AppState } from 'src/store/store';
 import { userLogoutStarted } from 'src/store/user/userActions';
-import { palette } from 'src/styles/palette';
+import { palette, shadow } from 'src/styles/palette';
 
 const waveURI = require('../image/Wave.png');
 
@@ -33,7 +33,7 @@ export const UserScreen: React.FC = () => {
       <View style={styles.buttonWrapper}>
         <CustomButton label={t('user.changeName')} onPress={() => setVisible(!isVisible)} />
         <CustomModal isVisible={isVisible} onClose={setVisible}>
-          <UserData />
+          <UserData onClose={setVisible} />
         </CustomModal>
         <CustomButton label="Log Out" onPress={() => dispatch(userLogoutStarted())} />
       </View>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   avatar: {
+    ...shadow,
     width: 150,
     height: 150,
     borderRadius: 150,

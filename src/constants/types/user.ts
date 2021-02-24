@@ -1,3 +1,5 @@
+import { IDrink } from './drink';
+
 export interface ILoginCredentials {
   email: string;
   password: string;
@@ -12,6 +14,7 @@ export interface IUser {
   email: string;
   name: string;
   avatar?: string;
+  drinks?: IDrink[];
 }
 
 export interface IUserResponse {

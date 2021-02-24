@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { BarCodeReadEvent, RNCamera } from 'react-native-camera';
 import { useDispatch } from 'react-redux';
 
@@ -16,35 +16,13 @@ interface IProps {
 export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [isBarcodeRead, setIsBarcodeRead] = useState(false);
-  const [barcodeType, setBarcodeType] = useState('');
-  const [barcodeValue, setBarcodeValue] = useState('');
-
-  useEffect(() => {
-    if (isBarcodeRead) {
-      Alert.alert(barcodeType, barcodeValue, [
-        {
-          text: 'OK',
-          onPress: () => {
-            setIsBarcodeRead(false);
-            setBarcodeType('');
-            setBarcodeValue('');
-            dispatch(getDrinkStarted(barcodeValue));
-            setBarCode(barcodeValue);
-            showModal(!isVisible);
-          },
-        },
-      ]);
-    }
-  }, [isBarcodeRead, barcodeType, barcodeValue]);
 
   const onBarcodeRead = (event: BarCodeReadEvent) => {
-    if (!isBarcodeRead) {
-      setIsBarcodeRead(true);
-      setBarcodeType(event.type);
-      setBarcodeValue(event.data);
-    }
+    dispatch(getDrinkStarted(event.data));
+    setBarCode(event.data);
+    showModal(true);
   };
+
   return (
     <View style={styles.wrapper}>
       <RNCamera
@@ -57,7 +35,7 @@ export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => 
           buttonPositive: `${t('common.buttonPositive')}`,
           buttonNegative: `${t('common.buttonNegative')}`,
         }}
-        onBarCodeRead={onBarcodeRead}
+        onBarCodeRead={!isVisible ? onBarcodeRead : undefined}
       />
       <View style={styles.check}></View>
     </View>
@@ -80,6 +58,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 250,
     height: 125,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: palette.orangeRed,
     alignSelf: 'center',
     backgroundColor: palette.transparentWhite,
   },

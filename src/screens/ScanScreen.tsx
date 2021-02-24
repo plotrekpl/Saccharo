@@ -14,7 +14,11 @@ export const ScanScreen: React.FC = () => {
     <>
       <Scan isVisible={isVisible} showModal={setVisible} setBarCode={setBarCode} />
       <CustomModal isVisible={isVisible} onClose={setVisible}>
-        {drink ? <ShowDrink drink={drink} /> : <ScanInformation barCode={barCode} />}
+        {drink ? (
+          <ShowDrink drink={drink} setVisible={setVisible} />
+        ) : (
+          <ScanInformation barCode={barCode} />
+        )}
       </CustomModal>
     </>
   );

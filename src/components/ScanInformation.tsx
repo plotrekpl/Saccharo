@@ -20,12 +20,9 @@ export const ScanInformation: React.FC<IProps> = ({ barCode }) => {
         <>
           <Text style={styles.scanInfo}>{t('drink.notExists')}</Text>
           <Text style={styles.scanInfo}>{t('drink.addDrink')}</Text>
+          <CustomButton label={t('common.add')} onPress={() => setIsForm(!isForm)} />
         </>
       )}
-      <CustomButton
-        label={`${t(isForm ? 'form.close' : 'common.add')}`}
-        onPress={() => setIsForm(!isForm)}
-      />
     </View>
   );
 };

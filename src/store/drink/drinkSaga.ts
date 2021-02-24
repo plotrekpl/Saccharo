@@ -3,6 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { IDrink } from 'src/constants';
 
 import { firebase } from '../../firebase/config';
+import * as userTypes from '../user/userTypes';
 import * as drinkActions from './drinkActions';
 import * as drinkTypes from './drinkTypes';
 
@@ -22,6 +23,7 @@ function* createDrinkSaga(action: drinkTypes.CreateDrinkStarted) {
       .ref('drinks/' + payload.barCode)
       .set(payload);
     yield put(drinkActions.createDrinkResolved('Added'));
+    yield put({ type: userTypes.ADD_DRINK_STARTED, payload });
   } catch (error) {
     yield put(drinkActions.createDrinkRejected(error));
   }

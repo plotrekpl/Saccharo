@@ -6,4 +6,5 @@ export enum alertTypes {
 
 export enum alertMessage {
   missingID = 'Your session has expired',
+  missingUser = 'No user',
 }

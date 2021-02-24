@@ -10,10 +10,11 @@ const translation = {
     list: 'List of today`s drinks',
     name: 'Name',
     sugar: 'Sugar',
-    amountOfSugar: 'Amount of sugar: ',
+    amountOfSugar: 'Amount of sugar',
     notExists: 'This drink doesn`t exist in database.',
-    addDrink: 'Do you want add drink ?',
-    create: 'Create drink',
+    addDrink: 'Do you want to add a new drink ?',
+    create: 'Create a drink',
+    missingDrink: 'You haven`t got a drink',
     drink: 'Drink',
   },
   authorization: {
@@ -30,7 +31,7 @@ const translation = {
   validation: {
     nameRequired: 'Name is required',
     emailRequired: 'Email address is required',
-    emailValid: 'Please enter valid email',
+    emailValid: 'Please enter a valid email',
     passwordMinLength: 'Password must be at least {{min}} characters',
     passwordRequired: 'Password is required',
     confirmPasswordMatch: 'Passwords do not match',
