@@ -17,8 +17,7 @@ export const ShowDrink: React.FC<IProps> = ({ drink, setVisible }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  /** Avoid using abbreviations in names. Name should be clear and exclusive */
-  const btnHandler = () => {
+  const handlerClose = () => {
     dispatch(addDrinkStarted(drink));
     setVisible(false);
   };
@@ -37,7 +36,7 @@ export const ShowDrink: React.FC<IProps> = ({ drink, setVisible }) => {
       </View>
       <CustomButton
         label={t('common.add')}
-        onPress={() => btnHandler()}
+        onPress={() => handlerClose()}
         customStyles={styles.btn}
       />
     </View>
