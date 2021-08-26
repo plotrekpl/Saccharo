@@ -46,18 +46,25 @@ export const UserData: React.FC<IProps> = ({ onClose }) => {
     onClose(false);
   };
 
-  const { setFieldValue, handleChange, values, errors, isValid, dirty } = useFormik({
+  const {
+    setFieldValue,
+    handleChange,
+    values,
+    errors,
+    isValid,
+    dirty,
+  } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: handleSubmit,
   });
 
   return (
-    <View>
+    <View testID="test">
       <Text style={styles.title}>{t('user.name')}:</Text>
       <CustomTextInput
         error={errors.name}
-        onChangeText={handleChange('name')}
+                onChangeText={handleChange('name')}
         value={values.name}
         placeholder="Name"
       />

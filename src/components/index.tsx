@@ -1,4 +1,5 @@
 export { Drink } from './Drink';
+export { DrinkT } from './DrinkT';
 export { ListDrinks } from './ListDrinks';
 export { CustomTextInput } from './CustomTextInput';
 export { CustomButton } from './CustomButton';
