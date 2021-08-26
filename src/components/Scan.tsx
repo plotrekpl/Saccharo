@@ -24,7 +24,7 @@ export const Scan: React.FC<IProps> = ({ showModal, isVisible, setBarCode }) => 
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View testID={'test'} style={styles.wrapper}>
       <RNCamera
         style={styles.preview}
         type={RNCamera.Constants.Type.back}

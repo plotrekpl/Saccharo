@@ -2,7 +2,7 @@ import { IDrink } from 'src/constants';
 
 import * as drinkTypes from './drinkTypes';
 
-interface State {
+export interface State {
   drinks: IDrink[];
   message: string;
   loading: boolean;
@@ -10,7 +10,7 @@ interface State {
   drink: IDrink | null;
 }
 
-const initialState: State = {
+export const initialState: State = {
   drinks: [],
   message: '',
   loading: false,
